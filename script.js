@@ -42,44 +42,29 @@ function updateCountdown() {
   const minutesEl = document.getElementById("minutes");
   const secondsEl = document.getElementById("seconds");
 
-  if (
-    !daysEl ||
-    !hoursEl ||
-    !minutesEl ||
-    !secondsEl
-  ) {
+  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) {
     return;
   }
 
-  let distance =
-    weddingDate - Date.now();
+  let distance = weddingDate - Date.now();
 
   if (distance < 0) {
     distance = 0;
   }
 
   const days =
-    Math.floor(
-      distance / 86400000
-    );
+    Math.floor(distance / 86400000);
 
   const hours =
-    Math.floor(
-      (distance / 3600000) % 24
-    );
+    Math.floor((distance / 3600000) % 24);
 
   const minutes =
-    Math.floor(
-      (distance / 60000) % 60
-    );
+    Math.floor((distance / 60000) % 60);
 
   const seconds =
-    Math.floor(
-      (distance / 1000) % 60
-    );
+    Math.floor((distance / 1000) % 60);
 
-  daysEl.textContent =
-    days;
+  daysEl.textContent = days;
 
   hoursEl.textContent =
     String(hours).padStart(2, "0");
@@ -93,10 +78,7 @@ function updateCountdown() {
 
 updateCountdown();
 
-setInterval(
-  updateCountdown,
-  1000
-);
+setInterval(updateCountdown, 1000);
 
 
 // ======================================================
@@ -104,119 +86,80 @@ setInterval(
 // ======================================================
 
 const heroSlides = [
-  ...document.querySelectorAll(
-    ".hero-slide"
-  )
+  ...document.querySelectorAll(".hero-slide")
 ];
 
 const heroPrev =
-  document.getElementById(
-    "heroPrev"
-  );
+  document.getElementById("heroPrev");
 
 const heroNext =
-  document.getElementById(
-    "heroNext"
-  );
+  document.getElementById("heroNext");
 
 let heroIndex = 0;
 let heroTimer = null;
 
 
-// Load images from data-src
-heroSlides.forEach(
-  (slide) => {
+heroSlides.forEach((slide) => {
+  const src = slide.dataset.src;
 
-    const src =
-      slide.dataset.src;
-
-    if (!src) {
-      return;
-    }
-
-    const preloader =
-      new Image();
-
-    preloader.onload =
-      () => {
-
-        slide.style.backgroundImage =
-          `url("${src}")`;
-
-      };
-
-    preloader.onerror =
-      () => {
-
-        console.error(
-          "Unable to load hero image:",
-          src
-        );
-
-        slide.style.backgroundImage =
-          'url("assets/images/couple.jpg")';
-
-      };
-
-    preloader.src =
-      src;
-
+  if (!src) {
+    return;
   }
-);
+
+  const preloader = new Image();
+
+  preloader.onload = () => {
+    slide.style.backgroundImage =
+      `url("${src}")`;
+  };
+
+  preloader.onerror = () => {
+    console.error(
+      "Unable to load hero image:",
+      src
+    );
+
+    slide.style.backgroundImage =
+      'url("assets/images/couple.jpg")';
+  };
+
+  preloader.src = src;
+});
 
 
-function showHeroSlide(
-  index
-) {
-
+function showHeroSlide(index) {
   if (!heroSlides.length) {
     return;
   }
 
   heroIndex =
-    (
-      index +
-      heroSlides.length
-    ) %
+    (index + heroSlides.length) %
     heroSlides.length;
 
   heroSlides.forEach(
-    (
-      slide,
-      slideIndex
-    ) => {
-
+    (slide, slideIndex) => {
       slide.classList.toggle(
         "active",
         slideIndex === heroIndex
       );
-
     }
   );
-
 }
 
 
 function nextHeroSlide() {
-  showHeroSlide(
-    heroIndex + 1
-  );
+  showHeroSlide(heroIndex + 1);
 }
 
 
 function previousHeroSlide() {
-  showHeroSlide(
-    heroIndex - 1
-  );
+  showHeroSlide(heroIndex - 1);
 }
 
 
 function resetHeroTimer() {
-
   if (heroTimer) {
-    clearInterval(
-      heroTimer
-    );
+    clearInterval(heroTimer);
   }
 
   heroTimer =
@@ -224,7 +167,6 @@ function resetHeroTimer() {
       nextHeroSlide,
       6000
     );
-
 }
 
 
@@ -234,11 +176,8 @@ showHeroSlide(0);
 heroPrev?.addEventListener(
   "click",
   () => {
-
     previousHeroSlide();
-
     resetHeroTimer();
-
   }
 );
 
@@ -246,11 +185,8 @@ heroPrev?.addEventListener(
 heroNext?.addEventListener(
   "click",
   () => {
-
     nextHeroSlide();
-
     resetHeroTimer();
-
   }
 );
 
@@ -265,14 +201,10 @@ if (heroSlides.length > 1) {
 // ======================================================
 
 const weddingAudio =
-  document.getElementById(
-    "weddingAudio"
-  );
+  document.getElementById("weddingAudio");
 
 const musicToggle =
-  document.getElementById(
-    "musicToggle"
-  );
+  document.getElementById("musicToggle");
 
 const musicPreferenceKey =
   "joel-libina-music-preference";
@@ -280,14 +212,10 @@ const musicPreferenceKey =
 const musicTimeKey =
   "joel-libina-music-time";
 
-let lastMusicSaveSecond =
-  -1;
+let lastMusicSaveSecond = -1;
 
 
-function setMusicButton(
-  isPlaying
-) {
-
+function setMusicButton(isPlaying) {
   if (!musicToggle) {
     return;
   }
@@ -308,20 +236,15 @@ function setMusicButton(
     "playing",
     isPlaying
   );
-
 }
 
 
-function saveMusicState(
-  preference
-) {
-
+function saveMusicState(preference) {
   if (!weddingAudio) {
     return;
   }
 
   try {
-
     localStorage.setItem(
       musicPreferenceKey,
       preference
@@ -332,38 +255,28 @@ function saveMusicState(
         weddingAudio.currentTime
       )
     ) {
-
       localStorage.setItem(
         musicTimeKey,
         String(
           weddingAudio.currentTime
         )
       );
-
     }
-
-  } catch (
-    error
-  ) {
-
+  } catch (error) {
     console.warn(
       "Could not save music state:",
       error
     );
-
   }
-
 }
 
 
 function restoreMusicTime() {
-
   if (!weddingAudio) {
     return;
   }
 
   try {
-
     const savedTime =
       Number(
         localStorage.getItem(
@@ -372,15 +285,12 @@ function restoreMusicTime() {
       );
 
     if (
-      Number.isFinite(
-        savedTime
-      ) &&
+      Number.isFinite(savedTime) &&
       savedTime > 0 &&
       Number.isFinite(
         weddingAudio.duration
       )
     ) {
-
       weddingAudio.currentTime =
         Math.min(
           savedTime,
@@ -389,76 +299,48 @@ function restoreMusicTime() {
             0
           )
         );
-
     }
-
-  } catch (
-    error
-  ) {
-
+  } catch (error) {
     console.warn(
       "Could not restore music position:",
       error
     );
-
   }
-
 }
 
 
 async function tryPlayMusic() {
-
   if (!weddingAudio) {
     return;
   }
 
-  let preference =
-    null;
+  let preference = null;
 
   try {
-
     preference =
       localStorage.getItem(
         musicPreferenceKey
       );
-
   } catch {
     preference = null;
   }
 
   if (
-    preference ===
-    "paused"
+    preference === "paused"
   ) {
-
-    setMusicButton(
-      false
-    );
-
+    setMusicButton(false);
     return;
-
   }
 
   try {
-
     await weddingAudio.play();
 
-    setMusicButton(
-      true
-    );
+    setMusicButton(true);
 
-    saveMusicState(
-      "playing"
-    );
-
+    saveMusicState("playing");
   } catch {
-
-    setMusicButton(
-      false
-    );
-
+    setMusicButton(false);
   }
-
 }
 
 
@@ -483,31 +365,18 @@ window.addEventListener(
 musicToggle?.addEventListener(
   "click",
   async () => {
-
     if (!weddingAudio) {
       return;
     }
 
-    if (
-      weddingAudio.paused
-    ) {
-
+    if (weddingAudio.paused) {
       try {
-
         await weddingAudio.play();
 
-        setMusicButton(
-          true
-        );
+        setMusicButton(true);
 
-        saveMusicState(
-          "playing"
-        );
-
-      } catch (
-        error
-      ) {
-
+        saveMusicState("playing");
+      } catch (error) {
         console.error(
           "Music playback failed:",
           error
@@ -516,23 +385,14 @@ musicToggle?.addEventListener(
         showToast(
           "Tap again to start the music."
         );
-
       }
-
     } else {
-
       weddingAudio.pause();
 
-      setMusicButton(
-        false
-      );
+      setMusicButton(false);
 
-      saveMusicState(
-        "paused"
-      );
-
+      saveMusicState("paused");
     }
-
   }
 );
 
@@ -540,11 +400,7 @@ musicToggle?.addEventListener(
 weddingAudio?.addEventListener(
   "play",
   () => {
-
-    setMusicButton(
-      true
-    );
-
+    setMusicButton(true);
   }
 );
 
@@ -552,11 +408,7 @@ weddingAudio?.addEventListener(
 weddingAudio?.addEventListener(
   "pause",
   () => {
-
-    setMusicButton(
-      false
-    );
-
+    setMusicButton(false);
   }
 );
 
@@ -564,7 +416,6 @@ weddingAudio?.addEventListener(
 weddingAudio?.addEventListener(
   "timeupdate",
   () => {
-
     const currentSecond =
       Math.floor(
         weddingAudio.currentTime
@@ -575,7 +426,6 @@ weddingAudio?.addEventListener(
         lastMusicSaveSecond &&
       currentSecond % 5 === 0
     ) {
-
       lastMusicSaveSecond =
         currentSecond;
 
@@ -584,9 +434,7 @@ weddingAudio?.addEventListener(
           ? "paused"
           : "playing"
       );
-
     }
-
   }
 );
 
@@ -594,7 +442,6 @@ weddingAudio?.addEventListener(
 window.addEventListener(
   "pagehide",
   () => {
-
     if (!weddingAudio) {
       return;
     }
@@ -604,13 +451,12 @@ window.addEventListener(
         ? "paused"
         : "playing"
     );
-
   }
 );
 
 
 // ======================================================
-// PAUSE BACKGROUND MUSIC WHILE HIGHLIGHTS VIDEO PLAYS
+// PAUSE MUSIC WHILE HIGHLIGHTS VIDEO PLAYS
 // ======================================================
 
 const highlightsVideo =
@@ -625,7 +471,6 @@ let musicWasPlayingBeforeVideo =
 highlightsVideo?.addEventListener(
   "play",
   () => {
-
     if (!weddingAudio) {
       return;
     }
@@ -633,20 +478,14 @@ highlightsVideo?.addEventListener(
     musicWasPlayingBeforeVideo =
       !weddingAudio.paused;
 
-    if (
-      musicWasPlayingBeforeVideo
-    ) {
-
+    if (musicWasPlayingBeforeVideo) {
       weddingAudio.pause();
-
     }
-
   }
 );
 
 
 async function resumeMusicAfterVideo() {
-
   if (
     !weddingAudio ||
     !musicWasPlayingBeforeVideo
@@ -655,23 +494,15 @@ async function resumeMusicAfterVideo() {
   }
 
   try {
-
     await weddingAudio.play();
-
-  } catch (
-    error
-  ) {
-
+  } catch (error) {
     console.log(
       "Music resume blocked:",
       error
     );
-
   }
 
-  musicWasPlayingBeforeVideo =
-    false;
-
+  musicWasPlayingBeforeVideo = false;
 }
 
 
@@ -705,7 +536,6 @@ const storyMore =
 storyReadMore?.addEventListener(
   "click",
   () => {
-
     if (!storyMore) {
       return;
     }
@@ -717,9 +547,7 @@ storyReadMore?.addEventListener(
 
     storyReadMore.setAttribute(
       "aria-expanded",
-      String(
-        !isOpen
-      )
+      String(!isOpen)
     );
 
     storyMore.hidden =
@@ -729,7 +557,6 @@ storyReadMore?.addEventListener(
       isOpen
         ? "Read More"
         : "Read Less";
-
   }
 );
 
@@ -739,15 +566,10 @@ storyReadMore?.addEventListener(
 // ======================================================
 
 const toast =
-  document.getElementById(
-    "toast"
-  );
+  document.getElementById("toast");
 
 
-function showToast(
-  message
-) {
-
+function showToast(message) {
   if (!toast) {
     return;
   }
@@ -766,15 +588,12 @@ function showToast(
   showToast.timer =
     setTimeout(
       () => {
-
         toast.classList.remove(
           "show"
         );
-
       },
       3000
     );
-
 }
 
 
@@ -782,17 +601,12 @@ function showToast(
 // MODAL HELPERS
 // ======================================================
 
-function openModal(
-  modal
-) {
-
+function openModal(modal) {
   if (!modal) {
     return;
   }
 
-  modal.classList.add(
-    "open"
-  );
+  modal.classList.add("open");
 
   modal.setAttribute(
     "aria-hidden",
@@ -802,21 +616,15 @@ function openModal(
   document.body.classList.add(
     "modal-open"
   );
-
 }
 
 
-function closeModal(
-  modal
-) {
-
+function closeModal(modal) {
   if (!modal) {
     return;
   }
 
-  modal.classList.remove(
-    "open"
-  );
+  modal.classList.remove("open");
 
   modal.setAttribute(
     "aria-hidden",
@@ -828,13 +636,10 @@ function closeModal(
       ".modal.open"
     )
   ) {
-
     document.body.classList.remove(
       "modal-open"
     );
-
   }
-
 }
 
 
@@ -858,26 +663,19 @@ const invitationCardPlaceholder =
   );
 
 
-if (
-  invitationCardImage
-) {
-
+if (invitationCardImage) {
   invitationCardImage.addEventListener(
     "load",
     () => {
-
       invitationCardImage.style.display =
         "block";
 
       if (
         invitationCardPlaceholder
       ) {
-
         invitationCardPlaceholder.style.display =
           "none";
-
       }
-
     }
   );
 
@@ -885,22 +683,17 @@ if (
   invitationCardImage.addEventListener(
     "error",
     () => {
-
       invitationCardImage.style.display =
         "none";
 
       if (
         invitationCardPlaceholder
       ) {
-
         invitationCardPlaceholder.style.display =
           "flex";
-
       }
-
     }
   );
-
 }
 
 
@@ -908,24 +701,16 @@ document
   .querySelectorAll(
     "[data-close-invitation]"
   )
-  .forEach(
-    (
-      element
-    ) => {
-
-      element.addEventListener(
-        "click",
-        () => {
-
-          closeModal(
-            invitationModal
-          );
-
-        }
-      );
-
-    }
-  );
+  .forEach((element) => {
+    element.addEventListener(
+      "click",
+      () => {
+        closeModal(
+          invitationModal
+        );
+      }
+    );
+  });
 
 
 // ======================================================
@@ -958,112 +743,92 @@ const greetingSubmit =
   );
 
 
-function renderGreetingDocs(
-  docs
-) {
-
+function renderGreetingDocs(docs) {
   if (!guestMessages) {
     return;
   }
 
-  guestMessages.innerHTML =
-    "";
+  guestMessages.innerHTML = "";
 
   if (!docs.length) {
-
     guestMessages.innerHTML =
       '<p class="empty-greetings">Be the first to leave Joel & Libina a message.</p>';
 
     return;
-
   }
 
-  docs.forEach(
-    (
-      docSnap
-    ) => {
+  docs.forEach((docSnap) => {
+    const item =
+      docSnap.data();
 
-      const item =
-        docSnap.data();
-
-      const card =
-        document.createElement(
-          "article"
-        );
-
-      card.className =
-        "guest-message-card";
-
-
-      const message =
-        document.createElement(
-          "p"
-        );
-
-      message.textContent =
-        item.message || "";
-
-
-      const name =
-        document.createElement(
-          "strong"
-        );
-
-      name.textContent =
-        `— ${item.name || "Guest"}`;
-
-
-      const meta =
-        document.createElement(
-          "div"
-        );
-
-      meta.className =
-        "greeting-meta";
-
-
-      const timestamp =
-        item.createdAt?.toDate?.();
-
-
-      meta.textContent =
-        timestamp
-          ? timestamp.toLocaleDateString(
-              undefined,
-              {
-                month:
-                  "short",
-                day:
-                  "numeric",
-                year:
-                  "numeric"
-              }
-            )
-          : "Just now";
-
-
-      card.append(
-        message,
-        name,
-        meta
+    const card =
+      document.createElement(
+        "article"
       );
 
-      guestMessages.appendChild(
-        card
+    card.className =
+      "guest-message-card";
+
+
+    const message =
+      document.createElement(
+        "p"
       );
 
-    }
-  );
+    message.textContent =
+      item.message || "";
 
+
+    const name =
+      document.createElement(
+        "strong"
+      );
+
+    name.textContent =
+      `— ${item.name || "Guest"}`;
+
+
+    const meta =
+      document.createElement(
+        "div"
+      );
+
+    meta.className =
+      "greeting-meta";
+
+
+    const timestamp =
+      item.createdAt?.toDate?.();
+
+
+    meta.textContent =
+      timestamp
+        ? timestamp.toLocaleDateString(
+            undefined,
+            {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            }
+          )
+        : "Just now";
+
+
+    card.append(
+      message,
+      name,
+      meta
+    );
+
+    guestMessages.appendChild(
+      card
+    );
+  });
 }
 
 
-if (
-  guestMessages
-) {
-
+if (guestMessages) {
   try {
-
     const greetingsQuery =
       query(
         collection(
@@ -1074,27 +839,18 @@ if (
           "createdAt",
           "desc"
         ),
-        limit(
-          50
-        )
+        limit(50)
       );
 
 
     onSnapshot(
       greetingsQuery,
-      (
-        snapshot
-      ) => {
-
+      (snapshot) => {
         renderGreetingDocs(
           snapshot.docs
         );
-
       },
-      (
-        error
-      ) => {
-
+      (error) => {
         console.error(
           "Greeting feed error:",
           error
@@ -1102,45 +858,34 @@ if (
 
         guestMessages.innerHTML =
           '<p class="empty-greetings">Greetings are temporarily unavailable.</p>';
-
       }
     );
-
-  } catch (
-    error
-  ) {
-
+  } catch (error) {
     console.error(
       "Firebase greeting setup error:",
       error
     );
-
   }
-
 }
 
 
 openGreetings?.addEventListener(
   "click",
   () => {
-
     openModal(
       greetingsModal
     );
 
     setTimeout(
       () => {
-
         document
           .getElementById(
             "guestName"
           )
           ?.focus();
-
       },
       50
     );
-
   }
 );
 
@@ -1149,32 +894,21 @@ document
   .querySelectorAll(
     "[data-close-modal]"
   )
-  .forEach(
-    (
-      element
-    ) => {
-
-      element.addEventListener(
-        "click",
-        () => {
-
-          closeModal(
-            greetingsModal
-          );
-
-        }
-      );
-
-    }
-  );
+  .forEach((element) => {
+    element.addEventListener(
+      "click",
+      () => {
+        closeModal(
+          greetingsModal
+        );
+      }
+    );
+  });
 
 
 greetingForm?.addEventListener(
   "submit",
-  async (
-    event
-  ) => {
-
+  async (event) => {
     event.preventDefault();
 
 
@@ -1196,35 +930,25 @@ greetingForm?.addEventListener(
       guestMessageInput?.value.trim();
 
 
-    if (
-      !name ||
-      !message
-    ) {
-
+    if (!name || !message) {
       showToast(
         "Please enter your name and message."
       );
 
       return;
-
     }
 
 
-    if (
-      greetingSubmit
-    ) {
-
+    if (greetingSubmit) {
       greetingSubmit.disabled =
         true;
 
       greetingSubmit.textContent =
         "Posting…";
-
     }
 
 
     try {
-
       await addDoc(
         collection(
           db,
@@ -1253,10 +977,8 @@ greetingForm?.addEventListener(
         )
         ?.scrollIntoView(
           {
-            behavior:
-              "smooth",
-            block:
-              "start"
+            behavior: "smooth",
+            block: "start"
           }
         );
 
@@ -1264,11 +986,7 @@ greetingForm?.addEventListener(
       showToast(
         "Your greeting has been added."
       );
-
-    } catch (
-      error
-    ) {
-
+    } catch (error) {
       console.error(
         "Greeting submit error:",
         error
@@ -1278,23 +996,15 @@ greetingForm?.addEventListener(
       showToast(
         "Could not post your greeting. Please try again."
       );
-
     } finally {
-
-      if (
-        greetingSubmit
-      ) {
-
+      if (greetingSubmit) {
         greetingSubmit.disabled =
           false;
 
         greetingSubmit.textContent =
           "Post Greeting";
-
       }
-
     }
-
   }
 );
 
@@ -1350,30 +1060,19 @@ const rsvpDone =
 
 
 function resetRsvpView() {
-
-  if (
-    rsvpFormView
-  ) {
-
+  if (rsvpFormView) {
     rsvpFormView.hidden =
       false;
-
   }
 
-  if (
-    rsvpSuccess
-  ) {
-
+  if (rsvpSuccess) {
     rsvpSuccess.hidden =
       true;
-
   }
-
 }
 
 
 function openRsvpModal() {
-
   resetRsvpView();
 
   openModal(
@@ -1382,17 +1081,14 @@ function openRsvpModal() {
 
   setTimeout(
     () => {
-
       document
         .getElementById(
           "rsvpName"
         )
         ?.focus();
-
     },
     50
   );
-
 }
 
 
@@ -1400,35 +1096,26 @@ document
   .querySelectorAll(
     "[data-close-rsvp]"
   )
-  .forEach(
-    (
-      element
-    ) => {
+  .forEach((element) => {
+    element.addEventListener(
+      "click",
+      () => {
+        closeModal(
+          rsvpModal
+        );
 
-      element.addEventListener(
-        "click",
-        () => {
-
-          closeModal(
-            rsvpModal
-          );
-
-          setTimeout(
-            resetRsvpView,
-            200
-          );
-
-        }
-      );
-
-    }
-  );
+        setTimeout(
+          resetRsvpView,
+          200
+        );
+      }
+    );
+  });
 
 
 rsvpDone?.addEventListener(
   "click",
   () => {
-
     closeModal(
       rsvpModal
     );
@@ -1437,7 +1124,6 @@ rsvpDone?.addEventListener(
       resetRsvpView,
       200
     );
-
   }
 );
 
@@ -1445,10 +1131,7 @@ rsvpDone?.addEventListener(
 rsvpAttendance?.addEventListener(
   "change",
   () => {
-
-    if (
-      !rsvpGuestCount
-    ) {
+    if (!rsvpGuestCount) {
       return;
     }
 
@@ -1468,17 +1151,13 @@ rsvpAttendance?.addEventListener(
 
     rsvpGuestCount.disabled =
       !attending;
-
   }
 );
 
 
 rsvpForm?.addEventListener(
   "submit",
-  async (
-    event
-  ) => {
-
+  async (event) => {
     event.preventDefault();
 
 
@@ -1500,8 +1179,7 @@ rsvpForm?.addEventListener(
       rsvpAttendance?.value;
 
     const guestCount =
-      attendance ===
-      "yes"
+      attendance === "yes"
         ? Number(
             rsvpGuestCount?.value
           )
@@ -1521,31 +1199,24 @@ rsvpForm?.addEventListener(
       guestCount < 0 ||
       guestCount > 10
     ) {
-
       showToast(
         "Please complete the RSVP form."
       );
 
       return;
-
     }
 
 
-    if (
-      rsvpSubmit
-    ) {
-
+    if (rsvpSubmit) {
       rsvpSubmit.disabled =
         true;
 
       rsvpSubmit.textContent =
         "Submitting…";
-
     }
 
 
     try {
-
       await addDoc(
         collection(
           db,
@@ -1563,61 +1234,40 @@ rsvpForm?.addEventListener(
 
 
       const attending =
-        attendance ===
-        "yes";
+        attendance === "yes";
 
 
       rsvpForm.reset();
 
 
-      if (
-        rsvpGuestCount
-      ) {
-
+      if (rsvpGuestCount) {
         rsvpGuestCount.disabled =
           false;
 
         rsvpGuestCount.value =
           1;
-
       }
 
 
-      if (
-        rsvpSuccessMessage
-      ) {
-
+      if (rsvpSuccessMessage) {
         rsvpSuccessMessage.textContent =
           attending
             ? `Thank you, ${name}. We can’t wait to celebrate with you!`
             : `Thank you, ${name}. We’ll miss you and appreciate you letting us know.`;
-
       }
 
 
-      if (
-        rsvpFormView
-      ) {
-
+      if (rsvpFormView) {
         rsvpFormView.hidden =
           true;
-
       }
 
 
-      if (
-        rsvpSuccess
-      ) {
-
+      if (rsvpSuccess) {
         rsvpSuccess.hidden =
           false;
-
       }
-
-    } catch (
-      error
-    ) {
-
+    } catch (error) {
       console.error(
         "RSVP submit error:",
         error
@@ -1627,23 +1277,15 @@ rsvpForm?.addEventListener(
       showToast(
         "Could not submit your RSVP. Please try again."
       );
-
     } finally {
-
-      if (
-        rsvpSubmit
-      ) {
-
+      if (rsvpSubmit) {
         rsvpSubmit.disabled =
           false;
 
         rsvpSubmit.textContent =
           "Submit RSVP";
-
       }
-
     }
-
   }
 );
 
@@ -1656,88 +1298,69 @@ document
   .querySelectorAll(
     ".action-tile"
   )
-  .forEach(
-    (
-      button
-    ) => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const action =
-            button.dataset.action;
+  .forEach((button) => {
+    button.addEventListener(
+      "click",
+      () => {
+        const action =
+          button.dataset.action;
 
 
-          if (
-            action ===
-            "invitation"
-          ) {
+        if (
+          action ===
+          "invitation"
+        ) {
+          openModal(
+            invitationModal
+          );
 
-            openModal(
-              invitationModal
-            );
-
-            return;
-
-          }
-
-
-          if (
-            action ===
-            "greetings"
-          ) {
-
-            openModal(
-              greetingsModal
-            );
-
-            setTimeout(
-              () => {
-
-                document
-                  .getElementById(
-                    "guestName"
-                  )
-                  ?.focus();
-
-              },
-              50
-            );
-
-            return;
-
-          }
-
-
-          if (
-            action ===
-            "livestream"
-          ) {
-
-            showToast(
-              "Live streaming details will be added soon."
-            );
-
-            return;
-
-          }
-
-
-          if (
-            action ===
-            "rsvp"
-          ) {
-
-            openRsvpModal();
-
-          }
-
+          return;
         }
-      );
 
-    }
-  );
+
+        if (
+          action ===
+          "greetings"
+        ) {
+          openModal(
+            greetingsModal
+          );
+
+          setTimeout(
+            () => {
+              document
+                .getElementById(
+                  "guestName"
+                )
+                ?.focus();
+            },
+            50
+          );
+
+          return;
+        }
+
+
+        if (
+          action ===
+          "livestream"
+        ) {
+          showToast(
+            "Live streaming details will be added soon."
+          );
+
+          return;
+        }
+
+
+        if (
+          action === "rsvp"
+        ) {
+          openRsvpModal();
+        }
+      }
+    );
+  });
 
 
 // ======================================================
@@ -1786,36 +1409,25 @@ let touchStartX =
 
 
 function refreshGalleryImages() {
-
   availableGalleryImages =
     galleryItems
       .filter(
-        (
-          item
-        ) =>
+        (item) =>
           item.classList.contains(
             "has-image"
           )
       )
       .map(
-        (
-          item
-        ) =>
+        (item) =>
           item.querySelector(
             "img"
           )
       )
-      .filter(
-        Boolean
-      );
-
+      .filter(Boolean);
 }
 
 
-function showGalleryImage(
-  index
-) {
-
+function showGalleryImage(index) {
   refreshGalleryImages();
 
 
@@ -1823,9 +1435,7 @@ function showGalleryImage(
     !availableGalleryImages.length ||
     !lightboxImage
   ) {
-
     return;
-
   }
 
 
@@ -1850,15 +1460,10 @@ function showGalleryImage(
     source.alt;
 
 
-  if (
-    lightboxCounter
-  ) {
-
+  if (lightboxCounter) {
     lightboxCounter.textContent =
       `${galleryIndex + 1} / ${availableGalleryImages.length}`;
-
   }
-
 }
 
 
@@ -1867,19 +1472,11 @@ if (
   "IntersectionObserver" in
   window
 ) {
-
   const galleryObserver =
     new IntersectionObserver(
-      (
-        entries,
-        observer
-      ) => {
-
+      (entries, observer) => {
         entries.forEach(
-          (
-            entry
-          ) => {
-
+          (entry) => {
             if (
               !entry.isIntersecting
             ) {
@@ -1897,11 +1494,9 @@ if (
 
             window.setTimeout(
               () => {
-
                 item.classList.add(
                   "gallery-visible"
                 );
-
               },
               Math.max(
                 index,
@@ -1913,52 +1508,35 @@ if (
             observer.unobserve(
               item
             );
-
           }
         );
-
       },
       {
-        threshold:
-          0.12
+        threshold: 0.12
       }
     );
 
 
   galleryItems.forEach(
-    (
-      item
-    ) => {
-
+    (item) => {
       galleryObserver.observe(
         item
       );
-
     }
   );
-
 } else {
-
   galleryItems.forEach(
-    (
-      item
-    ) => {
-
+    (item) => {
       item.classList.add(
         "gallery-visible"
       );
-
     }
   );
-
 }
 
 
 galleryItems.forEach(
-  (
-    item
-  ) => {
-
+  (item) => {
     const img =
       item.querySelector(
         "img"
@@ -1971,13 +1549,11 @@ galleryItems.forEach(
 
     const markLoaded =
       () => {
-
         item.classList.add(
           "has-image"
         );
 
         refreshGalleryImages();
-
       };
 
 
@@ -1985,23 +1561,18 @@ galleryItems.forEach(
       img.complete &&
       img.naturalWidth > 0
     ) {
-
       markLoaded();
-
     } else {
-
       img.addEventListener(
         "load",
         markLoaded
       );
-
     }
 
 
     img.addEventListener(
       "error",
       () => {
-
         img.style.display =
           "none";
 
@@ -2010,7 +1581,6 @@ galleryItems.forEach(
         );
 
         refreshGalleryImages();
-
       }
     );
 
@@ -2018,7 +1588,6 @@ galleryItems.forEach(
     item.addEventListener(
       "click",
       () => {
-
         if (
           !item.classList.contains(
             "has-image"
@@ -2045,10 +1614,8 @@ galleryItems.forEach(
         openModal(
           lightbox
         );
-
       }
     );
-
   }
 );
 
@@ -2056,11 +1623,9 @@ galleryItems.forEach(
 galleryPrev?.addEventListener(
   "click",
   () => {
-
     showGalleryImage(
       galleryIndex - 1
     );
-
   }
 );
 
@@ -2068,11 +1633,9 @@ galleryPrev?.addEventListener(
 galleryNext?.addEventListener(
   "click",
   () => {
-
     showGalleryImage(
       galleryIndex + 1
     );
-
   }
 );
 
@@ -2081,36 +1644,24 @@ document
   .querySelectorAll(
     "[data-close-gallery]"
   )
-  .forEach(
-    (
-      element
-    ) => {
-
-      element.addEventListener(
-        "click",
-        () => {
-
-          closeModal(
-            lightbox
-          );
-
-        }
-      );
-
-    }
-  );
+  .forEach((element) => {
+    element.addEventListener(
+      "click",
+      () => {
+        closeModal(
+          lightbox
+        );
+      }
+    );
+  });
 
 
 lightboxImage?.addEventListener(
   "touchstart",
-  (
-    event
-  ) => {
-
+  (event) => {
     touchStartX =
       event.changedTouches[0]
         .screenX;
-
   },
   {
     passive: true
@@ -2120,10 +1671,7 @@ lightboxImage?.addEventListener(
 
 lightboxImage?.addEventListener(
   "touchend",
-  (
-    event
-  ) => {
-
+  (event) => {
     const delta =
       event.changedTouches[0]
         .screenX -
@@ -2131,9 +1679,7 @@ lightboxImage?.addEventListener(
 
 
     if (
-      Math.abs(
-        delta
-      ) < 45
+      Math.abs(delta) < 45
     ) {
       return;
     }
@@ -2144,12 +1690,76 @@ lightboxImage?.addEventListener(
         ? galleryIndex - 1
         : galleryIndex + 1
     );
-
   },
   {
     passive: true
   }
 );
+
+
+// ======================================================
+// GENERAL SCROLL REVEAL ANIMATIONS
+// ======================================================
+
+const revealElements = [
+  ...document.querySelectorAll(
+    ".section-heading, .event-card, .profile-card, .story-card, .highlights-card, .blessing-card, .closing-section"
+  )
+];
+
+if (
+  "IntersectionObserver" in
+  window
+) {
+  const revealObserver =
+    new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(
+          (entry) => {
+            if (
+              !entry.isIntersecting
+            ) {
+              return;
+            }
+
+            entry.target.classList.add(
+              "reveal-visible"
+            );
+
+            observer.unobserve(
+              entry.target
+            );
+          }
+        );
+      },
+      {
+        threshold: 0.12,
+        rootMargin:
+          "0px 0px -40px 0px"
+      }
+    );
+
+
+  revealElements.forEach(
+    (element) => {
+      element.classList.add(
+        "reveal-item"
+      );
+
+      revealObserver.observe(
+        element
+      );
+    }
+  );
+} else {
+  revealElements.forEach(
+    (element) => {
+      element.classList.add(
+        "reveal-visible"
+      );
+    }
+  );
+}
 
 
 // ======================================================
@@ -2163,7 +1773,6 @@ const addCalendar =
 
 
 function downloadCalendarFile() {
-
   const ics =
 `BEGIN:VCALENDAR
 VERSION:2.0
@@ -2224,8 +1833,7 @@ END:VCALENDAR`;
     );
 
 
-  link.href =
-    url;
+  link.href = url;
 
   link.download =
     "joel-libina-wedding-events.ics";
@@ -2245,7 +1853,6 @@ END:VCALENDAR`;
   URL.revokeObjectURL(
     url
   );
-
 }
 
 
@@ -2261,15 +1868,10 @@ addCalendar?.addEventListener(
 
 document.addEventListener(
   "keydown",
-  (
-    event
-  ) => {
-
+  (event) => {
     if (
-      event.key ===
-      "Escape"
+      event.key === "Escape"
     ) {
-
       closeModal(
         greetingsModal
       );
@@ -2285,7 +1887,6 @@ document.addEventListener(
       closeModal(
         lightbox
       );
-
     }
 
 
@@ -2294,16 +1895,13 @@ document.addEventListener(
         "open"
       )
     ) {
-
       if (
         event.key ===
         "ArrowLeft"
       ) {
-
         showGalleryImage(
           galleryIndex - 1
         );
-
       }
 
 
@@ -2311,14 +1909,10 @@ document.addEventListener(
         event.key ===
         "ArrowRight"
       ) {
-
         showGalleryImage(
           galleryIndex + 1
         );
-
       }
-
     }
-
   }
 );
