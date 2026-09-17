@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#eee2dd" />
+  <title>Joel & Libina | Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="invitation-page">
+  <audio id="weddingAudio" src="assets/music/wedding-music.mp3" preload="auto" loop></audio>
+
+  <header class="hero" id="home">
+    <div class="hero-slides" aria-hidden="true">
+      <div class="hero-slide active" data-src="assets/images/hero-1.jpg"></div>
+      <div class="hero-slide" data-src="assets/images/hero-2.jpg"></div>
+      <div class="hero-slide" data-src="assets/images/hero-3.jpg"></div>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="top-controls">
+      <button class="icon-btn" type="button" aria-label="Play wedding music" id="musicToggle">♪</button>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-kicker">WE'RE GETTING MARRIED</p>
+      <h1>Joel <span>&</span> Libina</h1>
+
+      <div class="countdown" aria-label="Wedding countdown">
+        <div class="count-item"><strong id="days">0</strong><span>DAYS</span></div>
+        <div class="count-item"><strong id="hours">0</strong><span>HOURS</span></div>
+        <div class="count-item"><strong id="minutes">0</strong><span>MINUTES</span></div>
+        <div class="count-item"><strong id="seconds">0</strong><span>SECONDS</span></div>
+      </div>
+    </div>
+
+    <div class="hero-bottom-controls" aria-label="Hero photo controls">
+      <button class="hero-arrow" type="button" id="heroPrev" aria-label="Previous photo">‹</button>
+      <a class="scroll-indicator" href="#couple" aria-label="Scroll to couple section">⌄</a>
+      <button class="hero-arrow" type="button" id="heroNext" aria-label="Next photo">›</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="couple-section" id="couple">
+      <div class="section-heading">
+        <p class="eyebrow rose">HAPPY COUPLES</p>
+        <h2>Moments of Love</h2>
+      </div>
+
+      <article class="bio-card">
+        <div class="portrait-ring">
+          <img src="assets/images/joel.jpg" alt="Joel Mathew Philip" />
+        </div>
+        <h3>Joel Mathew Philip</h3>
+        <p>
+          Son of Mr. Philip Mathew and Mrs. Maryamma Philip, and brother of Joshua Mathew Philip,
+          Joel steps into this joyful journey with love and support from his family.
+        </p>
+      </article>
+
+      <article class="bio-card">
+        <div class="portrait-ring">
+          <img src="assets/images/libina.jpg" alt="Libina Mary Lalu" />
+        </div>
+        <h3>Libina Mary Lalu</h3>
+        <p>
+          Daughter of Mr. Lalu George and Mrs. Bindu Lalu, and sister of Lance George Lalu,
+          Libina begins this beautiful new chapter with love and family blessings.
+        </p>
+      </article>
+    </section>
+
+    <section class="story-section" id="story">
+      <div class="section-heading compact-heading">
+        <p class="eyebrow rose">OUR STORY</p>
+        <h2>A Journey of Love</h2>
+      </div>
+
+      <article class="story-card">
+        <div class="story-photo-wrap">
+          <img src="assets/images/couple.jpg" alt="Joel and Libina together" class="story-photo" />
+        </div>
+        <span class="story-date">10 Apr 2026 → 6 Sep 2026</span>
+        <h3>From a Message to Forever</h3>
+        <p>
+          It all began with a simple message on April 10, 2026. What started as a small conversation
+          quickly turned into long calls, early mornings, and a connection that felt natural from the very beginning.
+        </p>
+        <p>
+          On June 4, we finally met in person. After months of talking, being together made everything feel even more real.
+        </p>
+
+        <div class="story-more" id="storyMore" hidden>
+          <p>
+            That evening, we talked, laughed, and realized how easy it felt to simply be ourselves around each other.
+          </p>
+          <p>
+            Long distance brought plenty of miles and time apart, but every visit gave us another memory and another reason
+            to look forward to the next one. Then on September 6, 2026, came the moment that changed everything — the proposal.
+            She said yes, and the next chapter of our story began.
+          </p>
+        </div>
+
+        <button class="story-read-more" type="button" id="storyReadMore" aria-expanded="false" aria-controls="storyMore">Read More</button>
+      </article>
+    </section>
+
+    <section class="big-day-section" id="big-day">
+      <div class="section-heading light-heading">
+        <p class="eyebrow">WHEN & WHERE</p>
+        <h2>The Big Day</h2>
+      </div>
+
+      <div class="event-grid">
+        <article class="event-card-main">
+          <p class="event-type">ENGAGEMENT</p>
+          <h3>31st December 2026</h3>
+          <p class="event-time">11:30 AM IST</p>
+          <p class="event-location">
+            St. Thomas Marthoma Church Auditorium<br>
+            Kavungumprayar, Puramattom,<br>
+            Kerala, India
+          </p>
+          <a class="location-button" href="https://www.google.com/maps/place/St.+Thomas+Marthoma+Church,+Kavungumprayar/@9.3947287,76.6546238,17z/data=!3m1!4b1!4m6!3m5!1s0x3b063b43f0538349:0x31ac1e2afd8a3daf!8m2!3d9.3947287!4d76.6572041!16s%2Fg%2F1yg6d446z?entry=ttu&amp;g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">VIEW LOCATION</a>
+        </article>
+
+        <article class="event-card-main">
+          <p class="event-type">WEDDING CEREMONY</p>
+          <h3>3rd January 2027</h3>
+          <p class="event-time">11:00 AM IST</p>
+          <p class="event-location">
+            Mar Lazarus Orthodox Valiyapally<br>
+            Pathanapuram, Kerala, India
+          </p>
+          <a class="location-button" href="https://www.google.com/maps/place/Mar+Lazarus+Orthodox+Valiyapally/@9.0977894,76.8513028,17z/data=!3m1!4b1!4m6!3m5!1s0x3b0672e94f188b1f:0x8c8735cf6f14fd15!8m2!3d9.0977894!4d76.8538777!16s%2Fg%2F1tdkf1wg?entry=ttu&amp;g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">VIEW LOCATION</a>
+        </article>
+
+        <article class="event-card-main">
+          <p class="event-type">RECEPTION</p>
+          <h3>3rd January 2027</h3>
+          <p class="event-time">3:00 PM IST</p>
+          <p class="event-location">
+            Morning Star Convention Center<br>
+            Elamanoor, Kerala, India
+          </p>
+          <a class="location-button" href="https://www.google.com/maps/place/Morning+Star+Convention+Center,+Elamanoor/@34.2028252,-93.0388842,7z/data=!4m6!3m5!1s0x3b0612a3592bf1c3:0xaee73cf59d8015a6!8m2!3d9.1338875!4d76.8086252!16s%2Fg%2F11cnddn0tt?entry=ttu&amp;g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">VIEW LOCATION</a>
+        </article>
+      </div>
+
+      <button class="calendar-button" type="button" id="addCalendar">＋ ADD EVENTS TO CALENDAR</button>
+    </section>
+
+    <section class="highlights-section" id="highlights">
+      <div class="section-heading compact-heading">
+        <p class="eyebrow rose">OUR VIDEOS</p>
+        <h2>Our Highlights</h2>
+      </div>
+
+      <div class="video-card">
+        <video id="highlightsVideo" class="highlight-video" controls playsinline preload="metadata">
+          <source src="assets/videos/wedding-highlights.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </section>
+
+    <section class="actions-section" id="actions">
+      <div class="action-grid">
+        <button class="action-tile" type="button" data-action="invitation">
+          <span class="action-icon">✉</span>
+          <span>INVITATION CARD</span>
+        </button>
+        <button class="action-tile" type="button" data-action="greetings">
+          <span class="action-icon">♡</span>
+          <span>SEND GREETINGS</span>
+        </button>
+        <button class="action-tile" type="button" data-action="livestream">
+          <span class="action-icon">▷</span>
+          <span>LIVE STREAMING</span>
+        </button>
+        <button class="action-tile" type="button" data-action="rsvp">
+          <span class="action-icon">RSVP</span>
+          <span>RSVP</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="blessings-section" id="blessings">
+      <div class="section-heading compact-heading">
+        <p class="eyebrow rose">GREETINGS</p>
+        <h2>Love & Blessings</h2>
+      </div>
+
+      <blockquote class="verse-card">
+        <p class="verse-ref">MARK 10:9 &amp; 1 CORINTHIANS 16:14</p>
+        <p>“What God has joined together, let no one separate. Let all that you do be done in love.”</p>
+      </blockquote>
+
+      <div class="guest-messages" id="guestMessages" aria-live="polite">
+        <p class="empty-greetings">Loading greetings…</p>
+      </div>
+      <button class="secondary-button" type="button" id="openGreetings">Send Your Greetings</button>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+      <div class="section-heading compact-heading">
+        <p class="eyebrow rose">GALLERY</p>
+        <h2>Our Moments</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-item"><img src="assets/images/gallery-1.jpg" alt="Gallery photo 1"><span>Photo 1</span></figure>
+        <figure class="gallery-item"><img src="assets/images/gallery-2.jpg" alt="Gallery photo 2"><span>Photo 2</span></figure>
+        <figure class="gallery-item"><img src="assets/images/gallery-3.jpg" alt="Gallery photo 3"><span>Photo 3</span></figure>
+        <figure class="gallery-item"><img src="assets/images/gallery-4.jpg" alt="Gallery photo 4"><span>Photo 4</span></figure>
+        <figure class="gallery-item"><img src="assets/images/gallery-5.jpg" alt="Gallery photo 5"><span>Photo 5</span></figure>
+        <figure class="gallery-item"><img src="assets/images/gallery-6.jpg" alt="Gallery photo 6"><span>Photo 6</span></figure>
+        <figure class="gallery-item"><img src="assets/images/gallery-7.jpg" alt="Gallery photo 7"><span>Photo 7</span></figure>
+        <figure class="gallery-item"><img src="assets/images/gallery-8.jpg" alt="Gallery photo 8"><span>Photo 8</span></figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wedding-footer">
+    <p class="footer-names">Joel & Libina</p>
+    <p>03 · 01 · 2027</p>
+  </footer>
+
+  <div class="modal" id="invitationCardModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-invitation></div>
+    <div class="invitation-image-modal" role="dialog" aria-modal="true" aria-label="Wedding invitation card">
+      <button class="modal-close invitation-modal-close" type="button" data-close-invitation aria-label="Close invitation card">×</button>
+      <div class="invitation-image-wrap">
+        <img id="invitationCardImage" src="assets/images/invitation-card.jpg" alt="Joel and Libina wedding invitation card">
+        <div class="invitation-image-placeholder" id="invitationCardPlaceholder">
+          <p class="eyebrow rose">INVITATION</p>
+          <h2>Joel & Libina</h2>
+          <p>Upload <strong>assets/images/invitation-card.jpg</strong> and your invitation card will appear here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="greetingsModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="greetingTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close">×</button>
+      <p class="eyebrow rose">LOVE & BLESSINGS</p>
+      <h2 id="greetingTitle">Send a Greeting</h2>
+      <form id="greetingForm">
+        <label>
+          Your name
+          <input type="text" id="guestName" maxlength="60" required placeholder="Your name">
+        </label>
+        <label>
+          Your message
+          <textarea id="guestMessage" maxlength="500" rows="5" required placeholder="Write your blessing or message"></textarea>
+        </label>
+        <button class="secondary-button full-width" type="submit" id="greetingSubmit">Post Greeting</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="rsvpModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-rsvp></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+      <button class="modal-close" type="button" data-close-rsvp aria-label="Close">×</button>
+      <div id="rsvpFormView">
+        <p class="eyebrow rose">3 JANUARY 2027</p>
+        <h2 id="rsvpTitle">RSVP</h2>
+        <form id="rsvpForm">
+          <label>
+            Your name
+            <input type="text" id="rsvpName" maxlength="80" required placeholder="Your name">
+          </label>
+          <label>
+            Will you be attending?
+            <select id="rsvpAttendance" required>
+              <option value="">Select an option</option>
+              <option value="yes">Yes, I’ll be there</option>
+              <option value="no">Sorry, I can’t make it</option>
+            </select>
+          </label>
+          <label>
+            Number attending
+            <input type="number" id="rsvpGuestCount" min="0" max="10" value="1" required>
+          </label>
+          <label>
+            Message or note <span class="optional-text">(optional)</span>
+            <textarea id="rsvpMessage" maxlength="500" rows="4" placeholder="Anything you'd like us to know"></textarea>
+          </label>
+          <button class="secondary-button full-width" type="submit" id="rsvpSubmit">Submit RSVP</button>
+        </form>
+      </div>
+
+      <div class="rsvp-success" id="rsvpSuccess" hidden>
+        <div class="rsvp-success-heart" aria-hidden="true">♥</div>
+        <p class="eyebrow rose">RSVP RECEIVED</p>
+        <h2>Thank You!</h2>
+        <p id="rsvpSuccessMessage">Your RSVP has been received.</p>
+        <button class="secondary-button full-width" type="button" id="rsvpDone">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+    <div class="modal-backdrop" data-close-gallery></div>
+    <div class="lightbox-content" role="dialog" aria-modal="true" aria-label="Gallery photo viewer">
+      <button class="lightbox-close" type="button" data-close-gallery aria-label="Close gallery">×</button>
+      <button class="lightbox-arrow lightbox-prev" type="button" id="galleryPrev" aria-label="Previous photo">‹</button>
+      <img id="lightboxImage" src="" alt="Wedding gallery photo">
+      <button class="lightbox-arrow lightbox-next" type="button" id="galleryNext" aria-label="Next photo">›</button>
+      <p class="lightbox-counter" id="lightboxCounter"></p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
