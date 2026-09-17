@@ -1358,3 +1358,323 @@ select:focus-visible {
     transform: none !important;
   }
 }
+
+
+/* ======================================================
+   FINAL REFINEMENT PASS — 2026-09-17
+   ====================================================== */
+
+/* 1) Cleaner hero transition: quicker fade, less double-exposure. */
+.hero-slide {
+  opacity: 0;
+  transform: scale(1.012);
+  transition: opacity .55s ease, transform 6s ease;
+  will-change: opacity, transform;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 2) Lift the hero content slightly and give controls more breathing room. */
+.hero-content {
+  padding-bottom: 15.5vh;
+}
+
+/* 3) Slightly smaller countdown circles, especially on phones. */
+.countdown {
+  max-width: 700px;
+}
+
+.count-item {
+  width: 100%;
+  max-width: 154px;
+  justify-self: center;
+}
+
+/* 4) Music remains available but visually secondary to hero navigation. */
+.floating-music {
+  width: 42px;
+  height: 42px;
+  right: 16px;
+  bottom: 16px;
+  font-size: 16px;
+}
+
+.floating-music.playing {
+  font-size: 10px;
+}
+
+/* 5) Tighter profile rhythm. */
+.couple-section {
+  padding-top: 56px;
+  padding-bottom: 46px;
+}
+
+.couple-section .section-heading {
+  margin-bottom: 28px;
+}
+
+.bio-card {
+  margin-bottom: 36px;
+}
+
+.bio-card:last-child {
+  margin-bottom: 0;
+}
+
+.portrait-ring {
+  margin-bottom: 16px;
+}
+
+.bio-card h3 {
+  margin-bottom: 8px;
+}
+
+.bio-card p {
+  line-height: 1.68;
+}
+
+/* 6) Story card: wider text area and less empty padding. */
+.story-section {
+  padding-top: 64px;
+  padding-bottom: 70px;
+}
+
+.story-card {
+  max-width: 780px;
+  padding: 26px 22px 28px;
+}
+
+.story-card p {
+  max-width: 690px;
+  line-height: 1.68;
+}
+
+.story-photo-wrap {
+  margin-bottom: 18px;
+}
+
+/* 7) Big Day cards: consistent internal rhythm while allowing blessing copy. */
+.event-grid {
+  align-items: stretch;
+}
+
+.event-card-main {
+  min-height: 390px;
+  padding: 30px 22px 28px;
+}
+
+.event-type {
+  margin-bottom: 14px;
+}
+
+.event-card-main h3 {
+  margin-bottom: 2px;
+}
+
+.event-time {
+  margin: 0 0 14px;
+}
+
+.event-location {
+  margin-bottom: 16px;
+  line-height: 1.58;
+}
+
+.wedding-blessing {
+  margin: -2px auto 16px;
+  line-height: 1.5;
+}
+
+.location-button {
+  margin-top: auto;
+}
+
+/* 8) Softer and shorter action area. */
+.actions-section {
+  background: #414568;
+  padding-top: 50px;
+  padding-bottom: 52px;
+}
+
+.action-grid {
+  max-width: 660px;
+  gap: 18px 12px;
+}
+
+.action-tile {
+  min-height: 102px;
+  gap: 11px;
+}
+
+.action-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 17px;
+  font-size: 27px;
+}
+
+.action-tile > span:last-child {
+  font-size: 11px;
+  letter-spacing: .07em;
+}
+
+/* 9) Compact greeting cards so the section scales well with many messages. */
+.guest-messages {
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.guest-message-card,
+.empty-greetings {
+  padding: 14px 17px;
+  border-radius: 12px;
+}
+
+.guest-message-card p {
+  margin-bottom: 8px;
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.guest-message-card strong {
+  font-size: 12px;
+}
+
+.greeting-meta {
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+/* 10) Gallery cards share exactly the same finish. */
+.gallery-item,
+.gallery-item:nth-child(1),
+.gallery-item:nth-child(6) {
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(72,48,65,.075);
+  border: 1px solid rgba(255,255,255,.44);
+}
+
+/* 11) Closing already has a heart divider; make it read as the intentional finale. */
+.closing-divider {
+  margin-bottom: 14px;
+}
+
+.closing-divider b {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(190,126,151,.12);
+  border: 1px solid rgba(157,97,122,.22);
+}
+
+@media (max-width: 760px) {
+  .hero-content {
+    padding-bottom: 18vh;
+  }
+
+  .hero h1 {
+    margin-bottom: 18px;
+  }
+
+  .countdown {
+    max-width: 620px;
+    gap: 6px;
+  }
+
+  .count-item {
+    max-width: 135px;
+    transform: scale(.94);
+  }
+
+  .count-item strong {
+    font-size: clamp(27px, 8vw, 42px);
+  }
+
+  .hero-bottom-controls {
+    bottom: 20px;
+  }
+
+  .floating-music {
+    width: 40px;
+    height: 40px;
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    font-size: 15px;
+  }
+
+  .floating-music.playing {
+    font-size: 9px;
+  }
+
+  .couple-section {
+    padding-top: 50px;
+    padding-bottom: 40px;
+  }
+
+  .bio-card {
+    margin-bottom: 30px;
+  }
+
+  .portrait-ring {
+    width: min(61vw, 250px);
+  }
+
+  .bio-card p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .story-section {
+    padding-top: 56px;
+    padding-bottom: 62px;
+  }
+
+  .story-card {
+    padding: 22px 16px 24px;
+  }
+
+  .story-card p {
+    font-size: 14px;
+    line-height: 1.62;
+  }
+
+  .event-card-main {
+    min-height: 0;
+    padding: 26px 18px 24px;
+  }
+
+  .actions-section {
+    padding-top: 44px;
+    padding-bottom: 46px;
+  }
+
+  .action-grid {
+    gap: 14px 8px;
+  }
+
+  .action-tile {
+    min-height: 94px;
+  }
+
+  .action-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 25px;
+  }
+
+  .guest-message-card,
+  .empty-greetings {
+    padding: 13px 15px;
+  }
+
+  .gallery-item,
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(6) {
+    border-radius: 12px;
+  }
+}
