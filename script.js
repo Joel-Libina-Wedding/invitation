@@ -101,34 +101,53 @@ let heroTransitioning = false;
 
 
 heroSlides.forEach(
-  (slide) => {
+  (slide, index) => {
     const src =
       slide.dataset.src;
 
     if (!src) return;
 
-    const preloader =
-      new Image();
+    // Hero #1 is already requested directly by the HTML
+    // so it can paint immediately without waiting for JS/Firebase.
+    if (index === 0) return;
 
-    preloader.onload =
-      () => {
-        slide.style.backgroundImage =
-          `url("${src}")`;
-      };
+    const loadImage = () => {
+      const preloader =
+        new Image();
 
-    preloader.onerror =
-      () => {
-        console.error(
-          "Unable to load hero image:",
-          src
-        );
+      preloader.onload =
+        () => {
+          slide.style.backgroundImage =
+            `url("${src}")`;
+        };
 
-        slide.style.backgroundImage =
-          'url("assets/images/couple.jpg")';
-      };
+      preloader.onerror =
+        () => {
+          console.error(
+            "Unable to load hero image:",
+            src
+          );
+        };
 
-    preloader.src =
-      src;
+      preloader.src =
+        src;
+    };
+
+    // Let the first visible screen get priority, then prepare
+    // the remaining slideshow images in the background.
+    if (
+      "requestIdleCallback" in window
+    ) {
+      window.requestIdleCallback(
+        loadImage,
+        { timeout: 2500 }
+      );
+    } else {
+      window.setTimeout(
+        loadImage,
+        1200
+      );
+    }
   }
 );
 
