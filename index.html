@@ -8,14 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/images/hero-1.jpg" as="image" fetchpriority="high">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="invitation-page">
-  <audio id="weddingAudio" src="assets/music/wedding-music.mp3" preload="auto" loop></audio>
+  <audio id="weddingAudio" src="assets/music/wedding-music.mp3" preload="metadata" loop></audio>
 
   <header class="hero" id="home">
     <div class="hero-slides" aria-hidden="true">
-      <div class="hero-slide active" data-src="assets/images/hero-1.jpg"></div>
+      <div class="hero-slide active" data-src="assets/images/hero-1.jpg" style="background-image: url('assets/images/hero-1.jpg');"></div>
       <div class="hero-slide" data-src="assets/images/hero-2.jpg"></div>
       <div class="hero-slide" data-src="assets/images/hero-3.jpg"></div>
     </div>
