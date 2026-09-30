@@ -11,16 +11,19 @@
   <link rel="preload" href="assets/images/hero-1.jpg" as="image" fetchpriority="high">
   <script>
     (function () {
+      const root = document.documentElement;
+      let openingSeen = false;
+
       try {
         if (localStorage.getItem("joel-libina-theme") === "dark") {
-          document.documentElement.classList.add("dark-theme");
+          root.classList.add("dark-theme");
         }
-        if (sessionStorage.getItem("joel-libina-opening-seen") === "1") {
-          document.documentElement.classList.add("opening-seen");
-        }
+        openingSeen = sessionStorage.getItem("joel-libina-opening-seen") === "1";
       } catch (error) {
         // Storage can be unavailable in some privacy modes; the site still works.
       }
+
+      root.classList.add(openingSeen ? "opening-seen" : "opening-pending");
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
@@ -31,44 +34,63 @@
 
   <div class="opening-screen" id="openingScreen" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
     <div class="opening-texture" aria-hidden="true"></div>
-    <div class="opening-envelope" id="openingEnvelope">
-      <div class="opening-emboss opening-emboss-one" aria-hidden="true">❦</div>
-      <div class="opening-emboss opening-emboss-two" aria-hidden="true">✿</div>
-      <div class="opening-emboss opening-emboss-three" aria-hidden="true">❧</div>
-      <div class="opening-envelope-back" aria-hidden="true"></div>
-      <div class="opening-envelope-flap" aria-hidden="true"></div>
-      <div class="opening-copy">
-        <p class="opening-kicker">JOEL &amp; LIBINA</p>
-        <h1 id="openingTitle">Tap to Reveal</h1>
+    <div class="opening-glow opening-glow-one" aria-hidden="true"></div>
+    <div class="opening-glow opening-glow-two" aria-hidden="true"></div>
+
+    <div class="opening-royal-card">
+      <span class="royal-corner royal-corner-tl" aria-hidden="true"></span>
+      <span class="royal-corner royal-corner-tr" aria-hidden="true"></span>
+      <span class="royal-corner royal-corner-bl" aria-hidden="true"></span>
+      <span class="royal-corner royal-corner-br" aria-hidden="true"></span>
+
+      <div class="opening-crest" aria-hidden="true"><span>✦</span><b>J</b><i>L</i><span>✦</span></div>
+      <p class="opening-kicker">JOEL &amp; LIBINA</p>
+      <h1 id="openingTitle">You’re Invited</h1>
+      <div class="opening-ornament" aria-hidden="true"><span></span><b>❦</b><span></span></div>
+      <p class="opening-subtitle">A celebration of love, faith &amp; forever</p>
+
+      <div class="opening-envelope-scene" id="openingEnvelope">
+        <div class="opening-letter" aria-hidden="true">
+          <div class="letter-filigree">❦</div>
+          <p>Together with our families</p>
+          <div class="letter-monogram"><span class="letter-j">J</span><small>&amp;</small><span class="letter-l">L</span></div>
+          <strong>3 January 2027</strong>
+        </div>
+        <div class="opening-envelope-back" aria-hidden="true"></div>
+        <div class="opening-envelope-flap" aria-hidden="true"></div>
+        <div class="opening-envelope-front" aria-hidden="true"></div>
+
         <button class="wax-seal" id="openingReveal" type="button" aria-label="Open Joel and Libina's wedding invitation">
-          <span>J <small>&amp;</small> L</span>
+          <span class="seal-ring" aria-hidden="true"></span>
+          <span class="seal-monogram" aria-hidden="true">
+            <b class="seal-j">J</b><i class="seal-l">L</i><small>&amp;</small>
+          </span>
         </button>
-        <p class="opening-date">03 · 01 · 2027</p>
       </div>
+
+      <p class="opening-date">03 · 01 · 2027</p>
+      <p class="opening-hint">Tap the seal to reveal our invitation</p>
     </div>
-    <p class="opening-hint">Tap the seal to open our invitation</p>
   </div>
 
   <div class="petal-layer" aria-hidden="true">
-    <span class="petal" style="--left:5%;--delay:-1s;--duration:13s;--size:9px;--drift:38px;--rotate:190deg"></span>
-    <span class="petal" style="--left:13%;--delay:-8s;--duration:15s;--size:12px;--drift:-24px;--rotate:240deg"></span>
-    <span class="petal" style="--left:24%;--delay:-4s;--duration:12s;--size:8px;--drift:50px;--rotate:150deg"></span>
-    <span class="petal" style="--left:35%;--delay:-11s;--duration:16s;--size:11px;--drift:-40px;--rotate:280deg"></span>
-    <span class="petal" style="--left:47%;--delay:-6s;--duration:14s;--size:10px;--drift:28px;--rotate:220deg"></span>
-    <span class="petal" style="--left:58%;--delay:-2s;--duration:17s;--size:13px;--drift:-34px;--rotate:310deg"></span>
-    <span class="petal" style="--left:69%;--delay:-9s;--duration:13.5s;--size:8px;--drift:42px;--rotate:170deg"></span>
-    <span class="petal" style="--left:78%;--delay:-5s;--duration:15.5s;--size:11px;--drift:-30px;--rotate:260deg"></span>
-    <span class="petal" style="--left:88%;--delay:-12s;--duration:16.5s;--size:9px;--drift:32px;--rotate:210deg"></span>
-    <span class="petal" style="--left:96%;--delay:-7s;--duration:14.5s;--size:12px;--drift:-44px;--rotate:300deg"></span>
+    <span class="petal" style="--left:2%;--delay:-1s;--duration:15s;--size:8px;--drift:26px;--rotate:190deg"></span>
+    <span class="petal" style="--left:8%;--delay:-8s;--duration:17s;--size:11px;--drift:-18px;--rotate:240deg"></span>
+    <span class="petal" style="--left:16%;--delay:-4s;--duration:14s;--size:7px;--drift:34px;--rotate:150deg"></span>
+    <span class="petal" style="--left:27%;--delay:-11s;--duration:18s;--size:9px;--drift:-28px;--rotate:280deg"></span>
+    <span class="petal" style="--left:73%;--delay:-6s;--duration:16s;--size:8px;--drift:24px;--rotate:220deg"></span>
+    <span class="petal" style="--left:82%;--delay:-2s;--duration:19s;--size:11px;--drift:-26px;--rotate:310deg"></span>
+    <span class="petal" style="--left:91%;--delay:-9s;--duration:15.5s;--size:7px;--drift:28px;--rotate:170deg"></span>
+    <span class="petal" style="--left:97%;--delay:-5s;--duration:17.5s;--size:10px;--drift:-22px;--rotate:260deg"></span>
   </div>
 
   <div class="lantern-layer" aria-hidden="true">
-    <span class="lantern lantern-one"></span>
-    <span class="lantern lantern-two"></span>
-    <span class="lantern lantern-three"></span>
-    <span class="lantern lantern-four"></span>
-    <span class="lantern lantern-five"></span>
-    <span class="lantern lantern-six"></span>
+    <span class="lantern lantern-one"><i></i></span>
+    <span class="lantern lantern-two"><i></i></span>
+    <span class="lantern lantern-three"><i></i></span>
+    <span class="lantern lantern-four"><i></i></span>
+    <span class="lantern lantern-five"><i></i></span>
+    <span class="lantern lantern-six"><i></i></span>
   </div>
 
   <header class="hero" id="home">
@@ -306,7 +328,6 @@
   <footer class="wedding-footer">
     <p>Thank you for celebrating with us ♥</p>
   </footer>
-  </div>
 
   <div class="modal" id="greetingsModal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
@@ -381,20 +402,24 @@
     </div>
   </div>
 
-  <button
-    id="themeToggle"
-    class="floating-theme"
-    type="button"
-    aria-label="Switch to dark mode"
-    aria-pressed="false"
-  ><span class="theme-icon" aria-hidden="true">☾</span></button>
+  <div class="floating-controls" aria-label="Invitation controls">
+    <button
+      id="themeToggle"
+      class="floating-theme"
+      type="button"
+      aria-label="Switch to dark mode"
+      aria-pressed="false"
+      title="Dark mode"
+    ><span class="theme-icon" aria-hidden="true">☾</span></button>
 
-  <button
-    id="musicToggle"
-    class="floating-music"
-    type="button"
-    aria-label="Play wedding music"
-  >♪</button>
+    <button
+      id="musicToggle"
+      class="floating-music"
+      type="button"
+      aria-label="Play wedding music"
+      title="Wedding music"
+    >♪</button>
+  </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -405,6 +430,8 @@
       const openingReveal = document.getElementById("openingReveal");
       const themeToggle = document.getElementById("themeToggle");
       const themeIcon = themeToggle?.querySelector(".theme-icon");
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      let openingTimer = null;
 
       const applyThemeButtonState = () => {
         const isDark = root.classList.contains("dark-theme");
@@ -414,11 +441,13 @@
           themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
           themeToggle.title = isDark ? "Light mode" : "Dark mode";
         }
+        if (themeMeta) themeMeta.setAttribute("content", isDark ? "#160d1d" : "#eee2dd");
       };
 
       applyThemeButtonState();
 
       themeToggle?.addEventListener("click", () => {
+        root.classList.add("theme-transitioning");
         const isDark = root.classList.toggle("dark-theme");
         try {
           localStorage.setItem("joel-libina-theme", isDark ? "dark" : "light");
@@ -426,31 +455,43 @@
           // Ignore storage errors; the current page still switches theme.
         }
         applyThemeButtonState();
+        window.setTimeout(() => root.classList.remove("theme-transitioning"), 760);
       });
 
       const finishOpening = () => {
         if (!openingScreen || openingScreen.classList.contains("is-opening")) return;
+
+        openingReveal?.setAttribute("disabled", "");
         openingScreen.classList.add("is-opening");
+
         try {
           sessionStorage.setItem("joel-libina-opening-seen", "1");
         } catch (error) {
           // Ignore storage errors.
         }
-        root.classList.add("opening-seen");
-        window.setTimeout(() => {
+
+        window.clearTimeout(openingTimer);
+        openingTimer = window.setTimeout(() => {
           openingScreen.hidden = true;
-        }, 1050);
+          root.classList.remove("opening-pending");
+          root.classList.add("opening-seen");
+        }, 2450);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
+
       openingScreen?.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") finishOpening();
+        if ((event.key === "Enter" || event.key === " ") && event.target !== openingReveal) {
+          event.preventDefault();
+          finishOpening();
+        }
       });
 
       if (root.classList.contains("opening-seen") && openingScreen) {
         openingScreen.hidden = true;
+        root.classList.remove("opening-pending");
       } else {
-        window.setTimeout(() => openingReveal?.focus({ preventScroll: true }), 250);
+        window.setTimeout(() => openingReveal?.focus({ preventScroll: true }), 350);
       }
     })();
   </script>
