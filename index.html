@@ -9,10 +9,67 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
   <link rel="preload" href="assets/images/hero-1.jpg" as="image" fetchpriority="high">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("joel-libina-theme") === "dark") {
+          document.documentElement.classList.add("dark-theme");
+        }
+        if (sessionStorage.getItem("joel-libina-opening-seen") === "1") {
+          document.documentElement.classList.add("opening-seen");
+        }
+      } catch (error) {
+        // Storage can be unavailable in some privacy modes; the site still works.
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="invitation-page">
   <audio id="weddingAudio" src="assets/music/wedding-music.mp3" preload="metadata" loop></audio>
+
+
+  <div class="opening-screen" id="openingScreen" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
+    <div class="opening-texture" aria-hidden="true"></div>
+    <div class="opening-envelope" id="openingEnvelope">
+      <div class="opening-emboss opening-emboss-one" aria-hidden="true">❦</div>
+      <div class="opening-emboss opening-emboss-two" aria-hidden="true">✿</div>
+      <div class="opening-emboss opening-emboss-three" aria-hidden="true">❧</div>
+      <div class="opening-envelope-back" aria-hidden="true"></div>
+      <div class="opening-envelope-flap" aria-hidden="true"></div>
+      <div class="opening-copy">
+        <p class="opening-kicker">JOEL &amp; LIBINA</p>
+        <h1 id="openingTitle">Tap to Reveal</h1>
+        <button class="wax-seal" id="openingReveal" type="button" aria-label="Open Joel and Libina's wedding invitation">
+          <span>J <small>&amp;</small> L</span>
+        </button>
+        <p class="opening-date">03 · 01 · 2027</p>
+      </div>
+    </div>
+    <p class="opening-hint">Tap the seal to open our invitation</p>
+  </div>
+
+  <div class="petal-layer" aria-hidden="true">
+    <span class="petal" style="--left:5%;--delay:-1s;--duration:13s;--size:9px;--drift:38px;--rotate:190deg"></span>
+    <span class="petal" style="--left:13%;--delay:-8s;--duration:15s;--size:12px;--drift:-24px;--rotate:240deg"></span>
+    <span class="petal" style="--left:24%;--delay:-4s;--duration:12s;--size:8px;--drift:50px;--rotate:150deg"></span>
+    <span class="petal" style="--left:35%;--delay:-11s;--duration:16s;--size:11px;--drift:-40px;--rotate:280deg"></span>
+    <span class="petal" style="--left:47%;--delay:-6s;--duration:14s;--size:10px;--drift:28px;--rotate:220deg"></span>
+    <span class="petal" style="--left:58%;--delay:-2s;--duration:17s;--size:13px;--drift:-34px;--rotate:310deg"></span>
+    <span class="petal" style="--left:69%;--delay:-9s;--duration:13.5s;--size:8px;--drift:42px;--rotate:170deg"></span>
+    <span class="petal" style="--left:78%;--delay:-5s;--duration:15.5s;--size:11px;--drift:-30px;--rotate:260deg"></span>
+    <span class="petal" style="--left:88%;--delay:-12s;--duration:16.5s;--size:9px;--drift:32px;--rotate:210deg"></span>
+    <span class="petal" style="--left:96%;--delay:-7s;--duration:14.5s;--size:12px;--drift:-44px;--rotate:300deg"></span>
+  </div>
+
+  <div class="lantern-layer" aria-hidden="true">
+    <span class="lantern lantern-one"></span>
+    <span class="lantern lantern-two"></span>
+    <span class="lantern lantern-three"></span>
+    <span class="lantern lantern-four"></span>
+    <span class="lantern lantern-five"></span>
+    <span class="lantern lantern-six"></span>
+  </div>
 
   <header class="hero" id="home">
     <div class="hero-slides" aria-hidden="true">
@@ -111,22 +168,12 @@
       <div class="invitation-message-inner">
         <p class="eyebrow rose invitation-message-kicker">TOGETHER WITH OUR FAMILIES</p>
         <h2 id="invitation-message-title">We Joyfully Invite You</h2>
-
         <p class="invitation-message-copy">
           With the grace of God and the blessings of our families, we joyfully invite you to join us
           as we celebrate our marriage and begin our life together.
         </p>
-
-        <div class="invitation-message-divider" aria-hidden="true">
-          <span></span>
-          <b>♥</b>
-          <span></span>
-        </div>
-
-        <p class="invitation-message-special">
-          Your presence and prayers will make our day truly special.
-        </p>
-
+        <div class="invitation-message-divider" aria-hidden="true"><span></span><b>♥</b><span></span></div>
+        <p class="invitation-message-special">Your presence and prayers will make our day truly special.</p>
         <p class="invitation-message-names">Joel &amp; Libina</p>
         <p class="invitation-message-date">3 January 2027</p>
       </div>
@@ -197,10 +244,6 @@
 
     <section class="actions-section" id="actions">
       <div class="action-grid">
-        <button class="action-tile" type="button" data-action="invitation">
-          <span class="action-icon">✉</span>
-          <span>INVITATION CARD</span>
-        </button>
         <button class="action-tile" type="button" data-action="greetings">
           <span class="action-icon">♡</span>
           <span>SEND GREETINGS</span>
@@ -256,26 +299,13 @@
     <div class="closing-divider" aria-hidden="true"><span></span><b>♥</b><span></span></div>
     <p class="closing-kicker">WITH LOVE</p>
     <p class="closing-names">Joel & Libina</p>
+    <p class="closing-wait">We can’t wait to celebrate this beautiful day with you.</p>
     <p class="closing-date">3 January 2027</p>
   </section>
 
   <footer class="wedding-footer">
     <p>Thank you for celebrating with us ♥</p>
   </footer>
-
-  <div class="modal" id="invitationCardModal" aria-hidden="true">
-    <div class="modal-backdrop" data-close-invitation></div>
-    <div class="invitation-image-modal" role="dialog" aria-modal="true" aria-label="Wedding invitation card">
-      <button class="modal-close invitation-modal-close" type="button" data-close-invitation aria-label="Close invitation card">×</button>
-      <div class="invitation-image-wrap">
-        <img id="invitationCardImage" src="assets/images/invitation-card.jpg" alt="Joel and Libina wedding invitation card">
-        <div class="invitation-image-placeholder" id="invitationCardPlaceholder">
-          <p class="eyebrow rose">INVITATION</p>
-          <h2>Joel & Libina</h2>
-          <p>Upload <strong>assets/images/invitation-card.jpg</strong> and your invitation card will appear here.</p>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="modal" id="greetingsModal" aria-hidden="true">
@@ -352,6 +382,14 @@
   </div>
 
   <button
+    id="themeToggle"
+    class="floating-theme"
+    type="button"
+    aria-label="Switch to dark mode"
+    aria-pressed="false"
+  ><span class="theme-icon" aria-hidden="true">☾</span></button>
+
+  <button
     id="musicToggle"
     class="floating-music"
     type="button"
@@ -359,6 +397,63 @@
   >♪</button>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const openingScreen = document.getElementById("openingScreen");
+      const openingReveal = document.getElementById("openingReveal");
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = themeToggle?.querySelector(".theme-icon");
+
+      const applyThemeButtonState = () => {
+        const isDark = root.classList.contains("dark-theme");
+        if (themeIcon) themeIcon.textContent = isDark ? "☀" : "☾";
+        if (themeToggle) {
+          themeToggle.setAttribute("aria-pressed", String(isDark));
+          themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+          themeToggle.title = isDark ? "Light mode" : "Dark mode";
+        }
+      };
+
+      applyThemeButtonState();
+
+      themeToggle?.addEventListener("click", () => {
+        const isDark = root.classList.toggle("dark-theme");
+        try {
+          localStorage.setItem("joel-libina-theme", isDark ? "dark" : "light");
+        } catch (error) {
+          // Ignore storage errors; the current page still switches theme.
+        }
+        applyThemeButtonState();
+      });
+
+      const finishOpening = () => {
+        if (!openingScreen || openingScreen.classList.contains("is-opening")) return;
+        openingScreen.classList.add("is-opening");
+        try {
+          sessionStorage.setItem("joel-libina-opening-seen", "1");
+        } catch (error) {
+          // Ignore storage errors.
+        }
+        root.classList.add("opening-seen");
+        window.setTimeout(() => {
+          openingScreen.hidden = true;
+        }, 1050);
+      };
+
+      openingReveal?.addEventListener("click", finishOpening);
+      openingScreen?.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") finishOpening();
+      });
+
+      if (root.classList.contains("opening-seen") && openingScreen) {
+        openingScreen.hidden = true;
+      } else {
+        window.setTimeout(() => openingReveal?.focus({ preventScroll: true }), 250);
+      }
+    })();
+  </script>
 
   <script type="module" src="script.js"></script>
 </body>
