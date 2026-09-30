@@ -1933,30 +1933,32 @@ html.opening-pending body { overflow: hidden; }
   inset: 0;
   display: block;
   font-family: 'Parisienne', cursive;
+  transform: translateY(1px);
 }
 
-.seal-j,
+ .seal-j,
 .seal-l {
   position: absolute;
-  top: 25%;
+  top: 23%;
   color: #ffe1aa;
-  font-size: clamp(50px, 12vw, 66px);
+  font-size: clamp(54px, 13vw, 70px);
   font-weight: 400;
   line-height: 1;
   text-shadow: 0 1px 4px rgba(34,4,19,.38);
 }
 
-.seal-j { left: 18%; transform: rotate(-5deg); }
-.seal-l { right: 17%; transform: rotate(4deg); }
-
-.seal-monogram small {
-  position: absolute;
-  left: 50%;
-  top: 49%;
-  transform: translate(-50%, -50%);
-  color: #ddb576;
-  font: 600 11px/1 'Cormorant Garamond', serif;
+.seal-j {
+  left: 21%;
+  transform: rotate(-7deg);
+  z-index: 2;
 }
+
+.seal-l {
+  right: 19%;
+  transform: rotate(5deg);
+  z-index: 1;
+}
+
 
 .wax-seal:focus-visible {
   outline: 3px solid rgba(255,236,197,.92);
@@ -1998,32 +2000,32 @@ html.opening-pending body { overflow: hidden; }
     linear-gradient(165deg, #fbf5f0 0%, #f2e7e1 100%);
 }
 
-/* Reference-like sequence:
-   seal disappears -> whole upper flap opens -> cream inner paper fills screen
-   -> overlay fades directly into the hero. */
+/* Reveal sequence:
+   seal recedes -> upper flap visibly opens -> open state holds briefly
+   -> cream paper covers the viewport -> direct transition to hero. */
 .opening-screen.is-opening .wax-seal {
-  animation: referenceSealAway .28s ease forwards;
+  animation: referenceSealAway .34s ease forwards;
 }
 
 .opening-screen.is-opening .opening-family-copy {
-  animation: referenceCopyAway .26s ease forwards;
+  animation: referenceCopyAway .30s ease forwards;
 }
 
 .opening-screen.is-opening .opening-flap {
-  animation: referenceFlapOpen .78s cubic-bezier(.22,.74,.18,1) .20s forwards;
+  animation: referenceFlapOpen 1.00s cubic-bezier(.18,.72,.16,1) .18s forwards;
 }
 
 .opening-screen.is-opening .opening-inner-paper {
-  animation: referenceInnerPaper 1.06s ease .54s forwards;
+  animation: referenceInnerPaper 1.38s ease .72s forwards;
 }
 
 .opening-screen.is-opening {
-  animation: referenceOpeningFade .34s ease 1.24s forwards;
+  animation: referenceOpeningFade .38s ease 1.68s forwards;
 }
 
 @keyframes referenceSealAway {
   0%   { transform: translate(-50%,-50%) scale(1); opacity: 1; }
-  65%  { transform: translate(-50%,-50%) scale(.92); opacity: .88; }
+  55%  { transform: translate(-50%,-50%) scale(.94); opacity: .92; }
   100% { transform: translate(-50%,-50%) scale(.58); opacity: 0; }
 }
 
@@ -2033,14 +2035,16 @@ html.opening-pending body { overflow: hidden; }
 
 @keyframes referenceFlapOpen {
   0%   { transform: rotateX(0deg); }
-  48%  { transform: rotateX(92deg); }
+  38%  { transform: rotateX(72deg); }
+  72%  { transform: rotateX(138deg); }
   100% { transform: rotateX(178deg); }
 }
 
 @keyframes referenceInnerPaper {
   0%   { opacity: 0; }
-  38%  { opacity: 0; }
-  72%  { opacity: 1; }
+  28%  { opacity: 0; }
+  52%  { opacity: 0; }
+  76%  { opacity: 1; }
   100% { opacity: 1; }
 }
 
@@ -2083,7 +2087,7 @@ html.opening-pending body { overflow: hidden; }
 .lantern-layer {
   position: fixed;
   inset: 0;
-  z-index: 145;
+  z-index: 6;
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
@@ -2091,8 +2095,20 @@ html.opening-pending body { overflow: hidden; }
   transition: opacity .72s ease, visibility .72s ease;
 }
 .dark-theme .lantern-layer {
-  opacity: 1;
+  opacity: .68;
   visibility: visible;
+}
+
+.invitation-page > .hero {
+  position: relative;
+  z-index: 8;
+}
+
+.invitation-page > main,
+.invitation-page > .closing-section,
+.invitation-page > .wedding-footer {
+  position: relative;
+  z-index: 1;
 }
 
 .invitation-page > .modal,
@@ -2109,9 +2125,9 @@ html.opening-pending body { overflow: hidden; }
   --duration: 18s;
   position: absolute;
   bottom: -22vh;
-  width: 46px;
-  height: 67px;
-  opacity: .88;
+  width: 40px;
+  height: 58px;
+  opacity: .52;
   clip-path: polygon(13% 3%,87% 3%,100% 18%,92% 88%,78% 100%,22% 100%,8% 88%,0 18%);
   border-radius: 8px;
   background:
@@ -2125,10 +2141,10 @@ html.opening-pending body { overflow: hidden; }
       #d65b1d 84%,
       #843017 100%);
   box-shadow:
-    0 0 25px 9px rgba(255,135,25,.34),
-    0 0 66px 22px rgba(255,112,16,.16),
-    inset 0 0 15px rgba(255,244,170,.62);
-  filter: saturate(1.03);
+    0 0 18px 6px rgba(255,135,25,.18),
+    0 0 42px 14px rgba(255,112,16,.08),
+    inset 0 0 12px rgba(255,244,170,.42);
+  filter: saturate(.96) blur(.25px);
   animation: lanternAcrossViewport var(--duration) linear infinite;
   will-change: transform, opacity;
 }
@@ -2153,9 +2169,9 @@ html.opening-pending body { overflow: hidden; }
   border-radius: 45%;
   background:
     radial-gradient(ellipse at center,
-      rgba(255,249,181,.90) 0%,
-      rgba(255,202,68,.55) 38%,
-      rgba(255,135,22,.12) 72%,
+      rgba(255,249,181,.72) 0%,
+      rgba(255,202,68,.40) 38%,
+      rgba(255,135,22,.08) 72%,
       transparent 76%);
   filter: blur(2px);
 }
@@ -2170,80 +2186,64 @@ html.opening-pending body { overflow: hidden; }
   transform: translateX(-50%);
   border-radius: 50%;
   background: #fff3aa;
-  box-shadow: 0 0 9px 4px rgba(255,207,75,.74);
+  box-shadow: 0 0 7px 3px rgba(255,207,75,.46);
 }
 
 .lantern-one {
-  left: 5%;
-  --scale: .72;
-  --drift: 90px;
+  left: 7%;
+  --scale: .52;
+  --drift: 78px;
   --tilt: -3deg;
-  --duration: 17s;
-  animation-delay: -4s;
+  --duration: 22s;
+  animation-delay: -5s;
 }
 .lantern-two {
-  left: 18%;
-  --scale: 1.04;
-  --drift: -76px;
+  left: 23%;
+  --scale: .70;
+  --drift: -68px;
   --tilt: 2deg;
-  --duration: 22s;
-  animation-delay: -13s;
+  --duration: 27s;
+  animation-delay: -17s;
 }
 .lantern-three {
-  left: 33%;
-  --scale: .55;
-  --drift: 120px;
+  left: 39%;
+  --scale: .44;
+  --drift: 96px;
   --tilt: -2deg;
-  --duration: 15s;
-  animation-delay: -9s;
+  --duration: 20s;
+  animation-delay: -11s;
 }
 .lantern-four {
-  left: 47%;
-  --scale: .88;
-  --drift: -95px;
+  left: 53%;
+  --scale: .62;
+  --drift: -84px;
   --tilt: 3deg;
-  --duration: 20s;
-  animation-delay: -2s;
+  --duration: 25s;
+  animation-delay: -3s;
 }
 .lantern-five {
-  left: 61%;
-  --scale: .62;
-  --drift: 80px;
+  left: 66%;
+  --scale: .48;
+  --drift: 72px;
   --tilt: -4deg;
-  --duration: 16.5s;
-  animation-delay: -12s;
-}
-.lantern-six {
-  left: 76%;
-  --scale: 1.12;
-  --drift: -105px;
-  --tilt: 2deg;
-  --duration: 23s;
-  animation-delay: -7s;
-}
-.lantern-seven {
-  left: 88%;
-  --scale: .76;
-  --drift: 66px;
-  --tilt: -2deg;
-  --duration: 18.5s;
+  --duration: 21s;
   animation-delay: -15s;
 }
-.lantern-eight {
-  left: 41%;
-  --scale: 1.28;
-  --drift: 45px;
+.lantern-six {
+  left: 79%;
+  --scale: .74;
+  --drift: -94px;
   --tilt: 2deg;
-  --duration: 26s;
-  animation-delay: -19s;
+  --duration: 29s;
+  animation-delay: -9s;
 }
-.lantern-nine {
-  left: 70%;
-  --scale: .46;
-  --drift: -135px;
-  --tilt: -3deg;
-  --duration: 14.5s;
-  animation-delay: -6s;
+.lantern-seven {
+  left: 91%;
+  --scale: .50;
+  --drift: 60px;
+  --tilt: -2deg;
+  --duration: 23s;
+  animation-delay: -19s;
 }
 
 @keyframes lanternAcrossViewport {
@@ -2251,16 +2251,16 @@ html.opening-pending body { overflow: hidden; }
     transform: translate3d(0, 18vh, 0) scale(var(--scale)) rotate(calc(var(--tilt) * -1));
     opacity: 0;
   }
-  10% { opacity: .88; }
+  10% { opacity: .54; }
   35% {
     transform: translate3d(calc(var(--drift) * .45), -28vh, 0) scale(var(--scale)) rotate(var(--tilt));
-    opacity: .88;
+    opacity: .54;
   }
   68% {
     transform: translate3d(var(--drift), -76vh, 0) scale(var(--scale)) rotate(calc(var(--tilt) * -.65));
-    opacity: .84;
+    opacity: .50;
   }
-  90% { opacity: .72; }
+  90% { opacity: .38; }
   100% {
     transform: translate3d(calc(var(--drift) * .42), -135vh, 0) scale(var(--scale)) rotate(var(--tilt));
     opacity: 0;
@@ -2459,7 +2459,7 @@ html.opening-pending body { overflow: hidden; }
 .dark-theme .modal-card input,
 .dark-theme .modal-card textarea,
 .dark-theme .modal-card select { background: #150d1b; color: #f6e8ee; border-color: rgba(255,255,255,.14); }
-.dark-theme .petal { opacity: .09; background: linear-gradient(160deg, #d99aac 0%, #b85c7e 66%, #c58d4b 100%); }
+.dark-theme .petal { opacity: .06; background: linear-gradient(160deg, #d99aac 0%, #b85c7e 66%, #c58d4b 100%); }
 
 /* Mobile refinements */
 @media (max-width: 760px) {
@@ -2532,7 +2532,7 @@ html.opening-pending body { overflow: hidden; }
   .closing-wait { font-size: 15px; padding-inline: 8px; }
 
   .lantern {
-    opacity: .86;
+    opacity: .48;
   }
 }
 
