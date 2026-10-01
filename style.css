@@ -1758,7 +1758,7 @@ body,
   transition: opacity .72s ease, visibility .72s ease;
 }
 .dark-theme .lantern-layer {
-  opacity: .82;
+  opacity: .50;
   visibility: visible;
 }
 
@@ -1804,9 +1804,9 @@ body,
       #d65b1d 84%,
       #843017 100%);
   box-shadow:
-    0 0 18px 6px rgba(255,167,55,.26),
-    0 0 42px 14px rgba(255,145,35,.12),
-    inset 0 0 12px rgba(255,244,170,.55);
+    0 0 18px 6px rgba(255,167,55,.16),
+    0 0 42px 14px rgba(255,145,35,.07),
+    inset 0 0 12px rgba(255,244,170,.40);
   filter: saturate(.96) blur(.25px);
   animation: lanternAcrossViewport var(--duration) linear infinite;
   will-change: transform, opacity;
@@ -2443,3 +2443,34 @@ html.opening-pending, html.opening-pending body { overflow: hidden; }
 /* Keyboard indicators appear only when navigating controls, never on page entry. */
 .hero:focus { outline: none; }
 .hero-arrow:focus-visible { outline: 2px solid rgba(255,240,213,.9); outline-offset: 3px; }
+
+/* ---------------- Final mobile readability refinements ---------------- */
+.big-day-section::before,
+.actions-section::before,
+.actions-section::after,
+.blessings-section::before { content: none; }
+/* Four subdued lanterns remain close to the edges instead of crossing the page. */
+.lantern-one { left: -1%; --scale: .50; --drift: -5px; --duration: 28s; }
+.lantern-two { left: auto; right: -1%; --scale: .60; --drift: 5px; --duration: 32s; }
+.lantern-three { left: 0; --scale: .42; --drift: -4px; --duration: 35s; }
+.lantern-four { left: auto; right: 0; --scale: .48; --drift: 4px; --duration: 30s; }
+.floating-controls { transition: opacity .22s ease, transform .22s ease; }
+.floating-controls.controls-hidden { opacity: 0; transform: translateX(calc(100% + 24px)); pointer-events: none; }
+.floating-controls:focus-within { opacity: 1; transform: none; pointer-events: auto; }
+@media (max-width: 760px) {
+  .section-heading h2, .compact-heading h2, .light-heading h2 { font-size: clamp(46px,12.5vw,62px); line-height: 1.08; }
+  .section-heading { margin-bottom: 30px; }
+  .compact-heading { margin-bottom: 26px; }
+  .story-section, .blessings-section { padding-top: 50px; }
+  .big-day-section { padding-top: 54px; padding-bottom: 56px; }
+  .event-card-main { min-height: 0; padding: 23px 18px; }
+  .event-location { margin-bottom: 18px; }
+  .wedding-blessing { margin-bottom: 18px; }
+  .location-button { margin-top: 4px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .action-tile { min-height: 96px; gap: 10px; }
+  .action-tile > span:last-child { font-size: 11px; letter-spacing: .015em; line-height: 1.35; }
+  .closing-section { padding-bottom: calc(42px + env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-controls { transition: none; }
+}
