@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/images/hero-1.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/images/hero-1.jpg" as="image" fetchpriority="high" media="(min-width: 761px)">
+  <link rel="preload" href="assets/images/hero-2.jpg" as="image" fetchpriority="high" media="(max-width: 760px)">
   <script>
     (function () {
       const root = document.documentElement;
@@ -91,9 +92,6 @@
     <span class="lantern lantern-two"><i></i></span>
     <span class="lantern lantern-three"><i></i></span>
     <span class="lantern lantern-four"><i></i></span>
-    <span class="lantern lantern-five"><i></i></span>
-    <span class="lantern lantern-six"><i></i></span>
-    <span class="lantern lantern-seven"><i></i></span>
   </div>
 
   <header class="hero" id="home" tabindex="-1">
@@ -124,6 +122,19 @@
     </div>
   </header>
 
+  <script>
+    // Put the photo framing both of us first on phones, before script.js initializes the slideshow.
+    (function () {
+      if (!window.matchMedia("(max-width: 760px)").matches) return;
+      const slides = document.querySelectorAll(".hero-slide");
+      if (slides.length < 2) return;
+      const firstSource = slides[0].dataset.src;
+      slides[0].dataset.src = slides[1].dataset.src;
+      slides[1].dataset.src = firstSource;
+      slides[0].style.backgroundImage = `url("${slides[0].dataset.src}")`;
+    })();
+  </script>
+
   <main>
     <section class="couple-section" id="couple">
       <div class="section-heading">
@@ -137,8 +148,8 @@
         </div>
         <h3>Joel Mathew Philip</h3>
         <p>
-          Son of Mr. Philip Mathew and Mrs. Maryamma Philip, and brother of Joshua Mathew Philip,
-          Joel steps into this joyful journey with love and support from his family.
+          Son of Mr. Philip Mathew and Mrs. Maryamma Philip,<br>
+          and brother of Joshua Mathew Philip.
         </p>
       </article>
 
@@ -148,8 +159,8 @@
         </div>
         <h3>Libina Mary Lalu</h3>
         <p>
-          Daughter of Mr. Lalu George and Mrs. Bindu Lalu, and sister of Lance George Lalu,
-          Libina begins this beautiful new chapter with love and family blessings.
+          Daughter of Mr. Lalu George and Mrs. Bindu Lalu,<br>
+          and sister of Lance George Lalu.
         </p>
       </article>
     </section>
@@ -328,9 +339,6 @@
     <p class="closing-date">3 January 2027</p>
   </section>
 
-  <footer class="wedding-footer">
-    <p>Thank you for celebrating with us ♥</p>
-  </footer>
 
   <div class="modal" id="greetingsModal" aria-hidden="true">
     <div class="modal-backdrop" data-close-modal></div>
@@ -489,19 +497,19 @@
         // finishing its lift, so there is never a blank pause.
         window.setTimeout(() => {
           curtainTransition?.classList.add("show");
-        }, 430);
+        }, 340);
 
         // Remove the envelope only once the closed curtains are already
         // covering the hero underneath.
         window.setTimeout(() => {
           openingScreen.hidden = true;
           root.classList.add("opening-seen");
-        }, 680);
+        }, 590);
 
         // Give the closed curtains a short intentional hold before opening.
         window.setTimeout(() => {
           curtainTransition?.classList.add("open");
-        }, 830);
+        }, 710);
 
         // Let the roughly one-second curtain sweep finish before fading away.
         openingTimer = window.setTimeout(() => {
@@ -509,11 +517,11 @@
           root.classList.remove("opening-pending");
           openingScreen.inert = true;
           document.getElementById("home")?.focus({ preventScroll: true });
-        }, 2010);
+        }, 1840);
 
         window.setTimeout(() => {
           curtainTransition?.classList.remove("show", "open");
-        }, 2340);
+        }, 2160);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
@@ -529,6 +537,42 @@
         openingScreen.hidden = true;
         root.classList.remove("opening-pending");
       }
+    })();
+  </script>
+
+
+  <script>
+    (function () {
+      const controls = document.querySelector(".floating-controls");
+      const video = document.getElementById("highlightsVideo");
+      if (!controls) return;
+      let anchor = window.scrollY;
+      let queued = false;
+      let videoPlaying = false;
+      const setHidden = (hidden) => {
+        if (controls.contains(document.activeElement)) hidden = false;
+        controls.classList.toggle("controls-hidden", hidden);
+        controls.inert = hidden;
+      };
+      const update = () => {
+        queued = false;
+        const current = window.scrollY;
+        const delta = current - anchor;
+        if (videoPlaying) setHidden(true);
+        else if (current < window.innerHeight * .65) setHidden(false);
+        else if (Math.abs(delta) > 8) setHidden(delta > 0);
+        if (Math.abs(delta) > 8) anchor = current;
+      };
+      window.addEventListener("scroll", () => {
+        if (!queued) { queued = true; window.requestAnimationFrame(update); }
+      }, { passive: true });
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Tab") setHidden(false);
+      });
+      video?.addEventListener("play", () => { videoPlaying = true; setHidden(true); });
+      const restore = () => { videoPlaying = false; setHidden(false); anchor = window.scrollY; };
+      video?.addEventListener("pause", restore);
+      video?.addEventListener("ended", restore);
     })();
   </script>
 
