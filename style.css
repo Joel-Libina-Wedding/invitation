@@ -2449,14 +2449,6 @@ html.opening-pending, html.opening-pending body { overflow: hidden; }
 .actions-section::before,
 .actions-section::after,
 .blessings-section::before { content: none; }
-/* Four subdued lanterns remain close to the edges instead of crossing the page. */
-.lantern-one { left: -1%; --scale: .50; --drift: -5px; --duration: 28s; }
-.lantern-two { left: auto; right: -1%; --scale: .60; --drift: 5px; --duration: 32s; }
-.lantern-three { left: 0; --scale: .42; --drift: -4px; --duration: 35s; }
-.lantern-four { left: auto; right: 0; --scale: .48; --drift: 4px; --duration: 30s; }
-.floating-controls { transition: opacity .22s ease, transform .22s ease; }
-.floating-controls.controls-hidden { opacity: 0; transform: translateX(calc(100% + 24px)); pointer-events: none; }
-.floating-controls:focus-within { opacity: 1; transform: none; pointer-events: auto; }
 @media (max-width: 760px) {
   .section-heading h2, .compact-heading h2, .light-heading h2 { font-size: clamp(46px,12.5vw,62px); line-height: 1.08; }
   .section-heading { margin-bottom: 30px; }
@@ -2473,4 +2465,23 @@ html.opening-pending, html.opening-pending body { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   .floating-controls { transition: none; }
+}
+
+/* ---------------- Always-visible controls and content lanterns ---------------- */
+/* The opaque hero stacks above lanterns; content below it stacks underneath. */
+.invitation-page > .hero { isolation: isolate; z-index: 8; }
+.lantern-layer { z-index: 6; }
+.invitation-page > main, .invitation-page > .closing-section { z-index: 1; }
+.floating-controls { opacity: 1; visibility: visible; pointer-events: auto; }
+/* Narrow screens reserve a clear right-hand lane beside reading/video content. */
+@media (max-width: 980px) {
+  .highlights-section .video-card,
+  .blessings-section .verse-card,
+  .blessings-section .guest-messages {
+    width: calc(100% - 58px);
+    max-width: 760px;
+    margin-left: 0;
+    margin-right: 58px;
+  }
+  .blessings-section .guest-message-card { width: 100%; min-width: 0; overflow-wrap: anywhere; }
 }
