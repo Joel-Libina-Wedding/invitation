@@ -29,7 +29,7 @@
           themeMeta?.setAttribute("content", "#160d1d");
         }
 
-        openingSeen = sessionStorage.getItem("joel-libina-opening-v2-seen") === "1";
+        openingSeen = sessionStorage.getItem("joel-libina-opening-v3-seen") === "1";
       } catch (error) {
         // If storage is unavailable, keep the new dark-mode default.
         themeMeta?.setAttribute("content", "#160d1d");
@@ -96,7 +96,7 @@
     <span class="lantern lantern-seven"><i></i></span>
   </div>
 
-  <header class="hero" id="home">
+  <header class="hero" id="home" tabindex="-1">
     <div class="hero-slides" aria-hidden="true">
       <div class="hero-slide active" data-src="assets/images/hero-1.jpg" style="background-image: url('assets/images/hero-1.jpg');"></div>
       <div class="hero-slide" data-src="assets/images/hero-2.jpg"></div>
@@ -467,18 +467,18 @@
 
         openingReveal?.setAttribute("disabled", "");
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          try { sessionStorage.setItem("joel-libina-opening-v2-seen", "1"); } catch (error) {}
+          try { sessionStorage.setItem("joel-libina-opening-v3-seen", "1"); } catch (error) {}
           openingScreen.hidden = true;
           openingScreen.inert = true;
           root.classList.remove("opening-pending");
           root.classList.add("opening-seen");
-          document.querySelector(".hero-arrow")?.focus({ preventScroll: true });
+          document.getElementById("home")?.focus({ preventScroll: true });
           return;
         }
         openingScreen.classList.add("is-opening");
 
         try {
-          sessionStorage.setItem("joel-libina-opening-v2-seen", "1");
+          sessionStorage.setItem("joel-libina-opening-v3-seen", "1");
         } catch (error) {
           // Ignore storage errors.
         }
@@ -486,7 +486,7 @@
         window.clearTimeout(openingTimer);
 
         // Begin crossfading the closed curtains in while the flap is
-        // finishing its lift, so there is never a blank burgundy pause.
+        // finishing its lift, so there is never a blank pause.
         window.setTimeout(() => {
           curtainTransition?.classList.add("show");
         }, 430);
@@ -508,7 +508,7 @@
           curtainTransition?.classList.add("done");
           root.classList.remove("opening-pending");
           openingScreen.inert = true;
-          document.querySelector(".hero-arrow")?.focus({ preventScroll: true });
+          document.getElementById("home")?.focus({ preventScroll: true });
         }, 2010);
 
         window.setTimeout(() => {
@@ -528,8 +528,6 @@
       if (root.classList.contains("opening-seen") && openingScreen) {
         openingScreen.hidden = true;
         root.classList.remove("opening-pending");
-      } else {
-        window.setTimeout(() => openingReveal?.focus({ preventScroll: true }), 350);
       }
     })();
   </script>
