@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#160d1d" />
+  <meta name="theme-color" content="#563950" />
   <title>Joel & Libina | Wedding Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,13 +26,13 @@
           root.classList.remove("dark-theme");
           themeMeta?.setAttribute("content", "#eee2dd");
         } else {
-          themeMeta?.setAttribute("content", "#160d1d");
+          themeMeta?.setAttribute("content", "#563950");
         }
 
         openingSeen = sessionStorage.getItem("joel-libina-opening-v3-seen") === "1";
       } catch (error) {
         // If storage is unavailable, keep the new dark-mode default.
-        themeMeta?.setAttribute("content", "#160d1d");
+        themeMeta?.setAttribute("content", "#563950");
       }
 
       root.classList.add(openingSeen ? "opening-seen" : "opening-pending");
@@ -445,7 +445,7 @@
           themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
           themeToggle.title = isDark ? "Light mode" : "Dark mode";
         }
-        if (themeMeta) themeMeta.setAttribute("content", isDark ? "#160d1d" : "#eee2dd");
+        if (themeMeta) themeMeta.setAttribute("content", isDark ? "#563950" : "#eee2dd");
       };
 
       applyThemeButtonState();
