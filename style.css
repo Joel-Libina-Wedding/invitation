@@ -1739,30 +1739,35 @@ html.opening-pending body { overflow: hidden; }
     radial-gradient(circle at 88% 85%, rgba(39,10,28,.18), transparent 31%),
     linear-gradient(145deg, #8a4861 0%, #71364f 46%, #592840 100%);
   isolation: isolate;
+  box-shadow:
+    inset 0 0 0 1px rgba(230,190,123,.24),
+    inset 0 0 0 12px rgba(87,37,60,.10),
+    inset 0 0 0 13px rgba(230,190,123,.16);
 }
 
 .opening-envelope-page::before,
 .opening-envelope-page::after {
   position: absolute;
   z-index: 2;
-  color: rgba(82,34,56,.17);
+  bottom: 13%;
+  color: rgba(83,35,56,.16);
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(48px, 13vw, 84px);
+  font-size: clamp(46px, 12vw, 78px);
   line-height: 1;
   pointer-events: none;
-  text-shadow: 1px 1px 0 rgba(255,205,194,.10);
+  text-shadow:
+    -1px -1px 0 rgba(67,24,47,.08),
+    1px 1px 0 rgba(255,205,194,.10);
 }
 .opening-envelope-page::before {
   content: '❦';
-  left: 9%;
-  bottom: 17%;
-  transform: rotate(-17deg);
+  left: 8%;
+  transform: rotate(-16deg);
 }
 .opening-envelope-page::after {
-  content: '✿';
+  content: '❦';
   right: 8%;
-  bottom: 16%;
-  transform: rotate(15deg);
+  transform: rotate(16deg) scaleX(-1);
 }
 
 .opening-paper-texture {
@@ -1999,7 +2004,7 @@ html.opening-pending body { overflow: hidden; }
   z-index: 4;
   left: 8%;
   right: 8%;
-  bottom: max(5.8vh, 42px);
+  bottom: max(2.6vh, 20px);
   color: rgba(255,243,234,.97);
   text-align: center;
   transform: rotate(-.25deg);
@@ -2597,16 +2602,16 @@ html.opening-pending body { overflow: hidden; }
   background:
     repeating-linear-gradient(
       90deg,
-      rgba(255,255,255,.055) 0 6px,
-      rgba(255,255,255,.010) 6px 18px,
-      rgba(42,10,30,.11) 18px 28px
+      rgba(255,255,255,.045) 0 7px,
+      rgba(255,255,255,.008) 7px 20px,
+      rgba(42,10,30,.095) 20px 30px
     ),
     linear-gradient(180deg, #76415e 0%, #65334f 52%, #51233e 100%);
   box-shadow:
     inset 0 0 52px rgba(28,6,21,.24),
     0 0 18px rgba(38,9,27,.16);
   will-change: transform;
-  transition: transform .86s cubic-bezier(.22,.75,.18,1);
+  transition: transform 1.00s cubic-bezier(.22,.75,.18,1);
 }
 
 .curtain-panel::before {
@@ -2614,8 +2619,8 @@ html.opening-pending body { overflow: hidden; }
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 7px;
-  opacity: .86;
+  width: 4px;
+  opacity: .76;
   background: linear-gradient(90deg, #a66f3e, #e6be78 48%, #9c6739);
 }
 
@@ -2657,7 +2662,7 @@ html.opening-pending body { overflow: hidden; }
 @media (max-width: 760px) {
   .curtain-panel {
     width: 55%;
-    transition-duration: .82s;
+    transition-duration: .96s;
   }
 
   .curtain-panel::before {
@@ -2665,7 +2670,7 @@ html.opening-pending body { overflow: hidden; }
   }
 
   .opening-family-copy {
-    bottom: max(5vh, 34px);
+    bottom: max(2.2vh, 16px);
   }
 
   .opening-family-copy p {
