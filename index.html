@@ -491,31 +491,33 @@
 
         window.clearTimeout(openingTimer);
 
-        // Show closed curtains just as the flap finishes lifting.
+        // Begin crossfading the closed curtains in while the flap is
+        // finishing its lift, so there is never a blank burgundy pause.
         window.setTimeout(() => {
           curtainTransition?.classList.add("show");
-        }, 620);
+        }, 430);
 
-        // Remove the envelope immediately behind the closed curtains.
+        // Remove the envelope only once the closed curtains are already
+        // covering the hero underneath.
         window.setTimeout(() => {
           openingScreen.hidden = true;
           root.classList.remove("opening-pending");
           root.classList.add("opening-seen");
-        }, 700);
+        }, 680);
 
-        // Open the curtains directly onto the hero photo.
+        // Give the closed curtains a short intentional hold before opening.
         window.setTimeout(() => {
           curtainTransition?.classList.add("open");
-        }, 760);
+        }, 830);
 
-        // Fade the curtain layer away once it is fully parted.
+        // Let the roughly one-second curtain sweep finish before fading away.
         openingTimer = window.setTimeout(() => {
           curtainTransition?.classList.add("done");
-        }, 1640);
+        }, 1910);
 
         window.setTimeout(() => {
           curtainTransition?.classList.remove("show", "open");
-        }, 1940);
+        }, 2240);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
