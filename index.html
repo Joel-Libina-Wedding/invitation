@@ -29,7 +29,7 @@
           themeMeta?.setAttribute("content", "#160d1d");
         }
 
-        openingSeen = sessionStorage.getItem("joel-libina-opening-seen") === "1";
+        openingSeen = sessionStorage.getItem("joel-libina-opening-v2-seen") === "1";
       } catch (error) {
         // If storage is unavailable, keep the new dark-mode default.
         themeMeta?.setAttribute("content", "#160d1d");
@@ -47,53 +47,26 @@
   <div class="opening-screen" id="openingScreen" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
     <div class="opening-envelope-page">
       <div class="opening-paper-texture" aria-hidden="true"></div>
-
-      <div class="opening-bottom-seams" aria-hidden="true">
-        <span class="opening-seam opening-seam-left"></span>
-        <span class="opening-seam opening-seam-right"></span>
-      </div>
-
-      <div class="opening-flap" id="openingFlap" aria-hidden="true">
+      <div class="opening-bottom-seams" aria-hidden="true"></div>
+      <div class="opening-corner opening-corner-bottom-left" aria-hidden="true"></div>
+      <div class="opening-corner opening-corner-bottom-right" aria-hidden="true"></div>
+      <div class="opening-flap" id="openingFlap">
         <div class="opening-flap-face opening-flap-front">
-          <div class="embossed-florals">
-            <span class="embossed-flower flower-one">❀</span>
-            <span class="embossed-flower flower-two">❧</span>
-            <span class="embossed-flower flower-three">✿</span>
-            <span class="embossed-flower flower-four">❦</span>
-            <span class="embossed-flower flower-five">☘</span>
-            <span class="embossed-dot dot-one"></span>
-            <span class="embossed-dot dot-two"></span>
-            <span class="embossed-dot dot-three"></span>
-          </div>
-
-          <h1 id="openingTitle">Tap to Reveal</h1>
+          <div class="opening-corner opening-corner-top-left"></div>
+          <div class="opening-corner opening-corner-top-right"></div>
+          <div class="opening-flap-title"><h1 id="openingTitle">Tap to Reveal</h1><div class="opening-divider"><span></span><b>✧</b><span></span></div></div>
+          <svg class="opening-flap-edge" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 59 L50 100 L100 59" /></svg>
         </div>
-
-        <div class="opening-flap-face opening-flap-back"></div>
+        <div class="opening-flap-face opening-flap-back" aria-hidden="true"></div>
       </div>
-
-      <button
-        class="wax-seal"
-        id="openingReveal"
-        type="button"
-        aria-label="Open Joel and Libina's wedding invitation"
-      >
-        <span class="seal-ring" aria-hidden="true"></span>
-        <span class="seal-monogram" aria-hidden="true">
-          <b class="seal-j">J</b>
-          <i class="seal-l">L</i>
-        </span>
-      </button>
-
+      <button class="wax-seal" id="openingReveal" type="button" aria-label="Open Joel and Libina's wedding invitation"></button>
       <div class="opening-family-copy">
-        <p>With joyful hearts,</p>
-        <p>the families of</p>
+        <p class="opening-family-kicker">With joyful hearts</p>
+        <p class="opening-family-intro">the families of</p>
         <strong>Joel &amp; Libina</strong>
-        <p>invite you to celebrate their wedding</p>
-        <div class="opening-family-flourish" aria-hidden="true">❧</div>
+        <p class="opening-family-invite">invite you to celebrate<br>their wedding</p>
+        <div class="opening-divider" aria-hidden="true"><span></span><b>✧</b><span></span></div>
       </div>
-
-      <div class="opening-inner-paper" aria-hidden="true"></div>
     </div>
   </div>
 
@@ -493,10 +466,19 @@
         if (!openingScreen || openingScreen.classList.contains("is-opening")) return;
 
         openingReveal?.setAttribute("disabled", "");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          try { sessionStorage.setItem("joel-libina-opening-v2-seen", "1"); } catch (error) {}
+          openingScreen.hidden = true;
+          openingScreen.inert = true;
+          root.classList.remove("opening-pending");
+          root.classList.add("opening-seen");
+          document.querySelector(".hero-arrow")?.focus({ preventScroll: true });
+          return;
+        }
         openingScreen.classList.add("is-opening");
 
         try {
-          sessionStorage.setItem("joel-libina-opening-seen", "1");
+          sessionStorage.setItem("joel-libina-opening-v2-seen", "1");
         } catch (error) {
           // Ignore storage errors.
         }
@@ -513,7 +495,6 @@
         // covering the hero underneath.
         window.setTimeout(() => {
           openingScreen.hidden = true;
-          root.classList.remove("opening-pending");
           root.classList.add("opening-seen");
         }, 680);
 
@@ -525,6 +506,9 @@
         // Let the roughly one-second curtain sweep finish before fading away.
         openingTimer = window.setTimeout(() => {
           curtainTransition?.classList.add("done");
+          root.classList.remove("opening-pending");
+          openingScreen.inert = true;
+          document.querySelector(".hero-arrow")?.focus({ preventScroll: true });
         }, 2010);
 
         window.setTimeout(() => {
