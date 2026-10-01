@@ -1758,7 +1758,7 @@ body,
   transition: opacity .72s ease, visibility .72s ease;
 }
 .dark-theme .lantern-layer {
-  opacity: .68;
+  opacity: .82;
   visibility: visible;
 }
 
@@ -1804,9 +1804,9 @@ body,
       #d65b1d 84%,
       #843017 100%);
   box-shadow:
-    0 0 18px 6px rgba(255,135,25,.18),
-    0 0 42px 14px rgba(255,112,16,.08),
-    inset 0 0 12px rgba(255,244,170,.42);
+    0 0 18px 6px rgba(255,167,55,.26),
+    0 0 42px 14px rgba(255,145,35,.12),
+    inset 0 0 12px rgba(255,244,170,.55);
   filter: saturate(.96) blur(.25px);
   animation: lanternAcrossViewport var(--duration) linear infinite;
   will-change: transform, opacity;
@@ -1914,16 +1914,16 @@ body,
     transform: translate3d(0, 18vh, 0) scale(var(--scale)) rotate(calc(var(--tilt) * -1));
     opacity: 0;
   }
-  10% { opacity: .54; }
+  10% { opacity: .62; }
   35% {
     transform: translate3d(calc(var(--drift) * .45), -28vh, 0) scale(var(--scale)) rotate(var(--tilt));
-    opacity: .54;
+    opacity: .62;
   }
   68% {
     transform: translate3d(var(--drift), -76vh, 0) scale(var(--scale)) rotate(calc(var(--tilt) * -.65));
-    opacity: .50;
+    opacity: .58;
   }
-  90% { opacity: .38; }
+  90% { opacity: .44; }
   100% {
     transform: translate3d(calc(var(--drift) * .42), -135vh, 0) scale(var(--scale)) rotate(var(--tilt));
     opacity: 0;
@@ -2030,34 +2030,34 @@ body,
 .action-grid { max-width: 720px; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
 .closing-wait { max-width: 520px; margin: 0 auto 16px; color: #6f5664; font: 500 16px/1.65 'Cormorant Garamond', serif; }
 
-/* ---------------- Dark / lantern theme ---------------- */
+/* ---------------- Mauve / plum default theme ---------------- */
 .dark-theme {
   color-scheme: dark;
-  --cream: #1c1123;
-  --cream-2: #24142b;
-  --ink: #f7ede5;
+  --cream: #60435c;
+  --cream-2: #50364e;
+  --ink: #fff2e5;
+  --ink-soft: #f3e4eb;
   --white: #fff7ec;
-  --rose: #d28ca5;
-  --gold: #d9ad66;
+  --rose: #efd1df;
+  --gold: #e8c997;
+  --line-soft: rgba(232,201,151,.28);
 }
 .dark-theme body,
-.dark-theme .invitation-page { background: #120a18; color: #f7ede5; }
-
-/* Semi-transparent night panels let the edge lantern glow live behind them. */
+.dark-theme .invitation-page { background: #563950; color: #fff2e5; }
 .dark-theme .couple-section,
-.dark-theme .story-section,
 .dark-theme .highlights-section,
-.dark-theme .blessings-section,
 .dark-theme .gallery-section {
-  background:
-    radial-gradient(circle at 12% 10%, rgba(113,66,124,.15), transparent 30%),
-    linear-gradient(180deg, rgba(31,17,39,.94) 0%, rgba(18,10,24,.94) 100%);
+  background: radial-gradient(circle at 12% 10%, rgba(165,124,153,.18), transparent 35%),
+    linear-gradient(180deg, #684862 0%, #563950 100%);
+}
+.dark-theme .story-section,
+.dark-theme .blessings-section {
+  background: radial-gradient(circle at 85% 15%, rgba(157,111,147,.14), transparent 35%),
+    linear-gradient(180deg, #5d3e58 0%, #50364e 100%);
 }
 .dark-theme .invitation-message-section {
-  background:
-    radial-gradient(circle at 16% 15%, rgba(143,76,113,.17), transparent 30%),
-    radial-gradient(circle at 84% 84%, rgba(235,159,66,.06), transparent 32%),
-    linear-gradient(180deg, rgba(37,18,44,.94) 0%, rgba(18,9,24,.94) 100%);
+  background: radial-gradient(circle at 16% 15%, rgba(180,139,167,.17), transparent 35%),
+    linear-gradient(180deg, #70506a 0%, #5b3e56 100%);
 }
 .dark-theme .invitation-message-inner,
 .dark-theme .story-card,
@@ -2065,9 +2065,9 @@ body,
 .dark-theme .verse-card,
 .dark-theme .guest-message-card,
 .dark-theme .empty-greetings {
-  background: rgba(48,27,54,.82);
-  border-color: rgba(225,176,103,.18);
-  box-shadow: 0 18px 46px rgba(0,0,0,.24);
+  background: #442c42;
+  border-color: rgba(232,201,151,.28);
+  box-shadow: 0 14px 38px rgba(36,19,34,.20);
 }
 .dark-theme .section-heading h2,
 .dark-theme .compact-heading h2,
@@ -2078,7 +2078,7 @@ body,
 .dark-theme .modal-card h2 { color: #fff1df; }
 .dark-theme .eyebrow,
 .dark-theme .rose,
-.dark-theme .closing-kicker { color: #d8a1b7; }
+.dark-theme .closing-kicker { color: #efd1df; }
 .dark-theme .bio-card p,
 .dark-theme .story-card p,
 .dark-theme .invitation-message-copy,
@@ -2086,43 +2086,81 @@ body,
 .dark-theme .verse-card p,
 .dark-theme .guest-message-card p,
 .dark-theme .empty-greetings,
-.dark-theme .closing-wait { color: #eadce3; }
+.dark-theme .closing-wait { color: #f3e4eb; }
 .dark-theme .invitation-message-date,
-.dark-theme .greeting-meta { color: #c8aab7; }
+.dark-theme .greeting-meta { color: #e3cbd9; }
+.dark-theme .guest-message-card strong,
+.dark-theme .verse-ref,
+.dark-theme .story-date,
+.dark-theme .story-read-more { color: #f3d8a8; }
 .dark-theme .portrait-ring {
-  border-color: #d7a45d;
-  box-shadow: 0 0 0 6px rgba(215,164,93,.10), 0 17px 36px rgba(0,0,0,.22);
-  background: rgba(255,255,255,.035);
+  border-color: #e1bb80;
+  box-shadow: 0 0 0 6px rgba(225,187,128,.12), 0 14px 30px rgba(36,19,34,.20);
+  background: rgba(255,255,255,.045);
 }
 .dark-theme .big-day-section {
-  background:
-    radial-gradient(circle at 50% 0%, rgba(134,72,114,.18), transparent 35%),
-    linear-gradient(180deg, rgba(69,35,72,.96) 0%, rgba(46,22,53,.96) 100%);
+  background: radial-gradient(circle at 50% 0%, rgba(186,145,171,.12), transparent 40%),
+    linear-gradient(180deg, #74506c 0%, #60415b 100%);
 }
 .dark-theme .event-card-main {
-  background: rgba(255,246,237,.94);
-  box-shadow: 0 15px 38px rgba(0,0,0,.24);
+  background: #442c42; color: #fff1df;
+  border-color: rgba(232,201,151,.38);
+  box-shadow: 0 14px 34px rgba(36,19,34,.20);
 }
-.dark-theme .actions-section { background: rgba(32,24,57,.96); }
-.dark-theme .action-icon { border-color: rgba(238,188,97,.76); color: #ffe5aa; }
+.dark-theme .event-type { color: #f3d8a8; }
+.dark-theme .event-card-main h3,
+.dark-theme .event-time { color: #fff1df; }
+.dark-theme .event-location,
+.dark-theme .wedding-blessing,
+.dark-theme .wedding-blessing strong { color: #f3e4eb; }
+.dark-theme .location-button { color: #fff1df; background: #694862; border-color: #e1bb80; }
+.dark-theme .location-button:hover { background: #7a566f; }
+.dark-theme .actions-section { background: #50364e; }
+.dark-theme .action-tile { color: #fff1df; }
+.dark-theme .action-icon { border-color: rgba(232,201,151,.76); color: #f3d8a8; }
+.dark-theme .action-tile:hover { background: rgba(232,201,151,.09); }
+.dark-theme .secondary-button { background: #76536e; color: #fff7ec; border: 1px solid rgba(232,201,151,.38); }
+.dark-theme .secondary-button:hover { background: #88637e; }
+.dark-theme .calendar-button { background: #50364e; color: #fff1df; border-color: #e1bb80; }
+.dark-theme .calendar-button:hover { background: #694862; }
 .dark-theme .secondary-button,
 .dark-theme .calendar-button,
-.dark-theme .location-button { box-shadow: 0 10px 24px rgba(0,0,0,.15); }
+.dark-theme .location-button { box-shadow: 0 8px 20px rgba(36,19,34,.15); }
 .dark-theme .closing-section {
-  background:
-    radial-gradient(circle at 50% 0%, rgba(126,71,112,.16), transparent 40%),
-    linear-gradient(180deg, rgba(29,16,36,.96) 0%, rgba(16,8,21,.96) 100%);
-  color: #f6e8eb;
+  background: linear-gradient(180deg, #60435c 0%, #50364e 100%); color: #fff1df;
 }
-.dark-theme .closing-names { color: #fff0df; }
-.dark-theme .closing-date { color: #c8a7b6; }
-.dark-theme .wedding-footer { background: rgba(10,5,13,.98); color: #d8c7cf; }
-.dark-theme .modal-card { background: #25172c; color: #f6e8ee; border: 1px solid rgba(218,167,100,.16); }
-.dark-theme .modal-card label { color: #e4d3dc; }
+.dark-theme .closing-names { color: #f3d8a8; }
+.dark-theme .closing-date { color: #e3cbd9; }
+.dark-theme .wedding-footer { background: #442c42; color: #f3e4eb; }
+.dark-theme .modal-card { background: #442c42; color: #fff1df; border: 1px solid rgba(232,201,151,.28); }
+.dark-theme .modal-card label,
+.dark-theme .optional-text { color: #f3e4eb; }
 .dark-theme .modal-card input,
 .dark-theme .modal-card textarea,
-.dark-theme .modal-card select { background: #150d1b; color: #f6e8ee; border-color: rgba(255,255,255,.14); }
+.dark-theme .modal-card select { background: #382536; color: #fff1df; border-color: rgba(232,201,151,.38); }
+.dark-theme .modal-card input::placeholder,
+.dark-theme .modal-card textarea::placeholder { color: #d9c2d0; opacity: 1; }
 .dark-theme .petal { opacity: .06; background: linear-gradient(160deg, #d99aac 0%, #b85c7e 66%, #c58d4b 100%); }
+
+.dark-theme .verse-ref { color: #f3d8a8 !important; }
+.dark-theme .modal-close { color: #fff1df; }
+.dark-theme .rsvp-success p:not(.eyebrow) { color: #f3e4eb; }
+.dark-theme .rsvp-success-heart { background: #76536e; color: #f3d8a8; }
+.dark-theme .gallery-item { background: #442c42; border-color: rgba(232,201,151,.30); }
+.dark-theme .gallery-item span { color: #e3cbd9; }
+.dark-theme .story-read-more:hover { color: #fff1df; }
+
+/* Photo colors stay natural; only hero controls take the coordinated palette. */
+.count-item { background: rgba(250,239,235,.94); color: #50364e; border: 1px solid rgba(232,201,151,.58); }
+.dark-theme .count-item { background: rgba(96,67,92,.91); color: #fff1df; border-color: rgba(232,201,151,.78); }
+.dark-theme .count-item strong { color: #f3d8a8; }
+.hero-arrow { background: rgba(96,67,92,.45); border-color: rgba(232,201,151,.70); color: #fff1df; }
+.hero-arrow:hover { background: rgba(96,67,92,.68); }
+.scroll-indicator { border-color: rgba(232,201,151,.8); color: #fff1df; }
+.dark-theme .floating-controls { background: rgba(68,44,66,.78); border-color: rgba(232,201,151,.5); }
+.dark-theme .floating-controls .floating-theme,
+.dark-theme .floating-controls .floating-music { background: rgba(118,83,110,.84) !important; color: #f3d8a8 !important; border-color: rgba(232,201,151,.7) !important; }
+.dark-theme .floating-controls .floating-music.playing { background: rgba(145,104,132,.95) !important; }
 
 /* Mobile refinements */
 @media (max-width: 760px) {
