@@ -541,40 +541,6 @@
   </script>
 
 
-  <script>
-    (function () {
-      const controls = document.querySelector(".floating-controls");
-      const video = document.getElementById("highlightsVideo");
-      if (!controls) return;
-      let anchor = window.scrollY;
-      let queued = false;
-      let videoPlaying = false;
-      const setHidden = (hidden) => {
-        if (controls.contains(document.activeElement)) hidden = false;
-        controls.classList.toggle("controls-hidden", hidden);
-        controls.inert = hidden;
-      };
-      const update = () => {
-        queued = false;
-        const current = window.scrollY;
-        const delta = current - anchor;
-        if (videoPlaying) setHidden(true);
-        else if (current < window.innerHeight * .65) setHidden(false);
-        else if (Math.abs(delta) > 8) setHidden(delta > 0);
-        if (Math.abs(delta) > 8) anchor = current;
-      };
-      window.addEventListener("scroll", () => {
-        if (!queued) { queued = true; window.requestAnimationFrame(update); }
-      }, { passive: true });
-      window.addEventListener("keydown", (event) => {
-        if (event.key === "Tab") setHidden(false);
-      });
-      video?.addEventListener("play", () => { videoPlaying = true; setHidden(true); });
-      const restore = () => { videoPlaying = false; setHidden(false); anchor = window.scrollY; };
-      video?.addEventListener("pause", restore);
-      video?.addEventListener("ended", restore);
-    })();
-  </script>
 
   <script type="module" src="script.js"></script>
 </body>
