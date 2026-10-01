@@ -525,11 +525,11 @@
         // Let the roughly one-second curtain sweep finish before fading away.
         openingTimer = window.setTimeout(() => {
           curtainTransition?.classList.add("done");
-        }, 1910);
+        }, 2010);
 
         window.setTimeout(() => {
           curtainTransition?.classList.remove("show", "open");
-        }, 2240);
+        }, 2340);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
