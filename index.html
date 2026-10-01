@@ -7,7 +7,7 @@
   <title>Joel & Libina | Wedding Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
   <link rel="preload" href="assets/images/hero-1.jpg" as="image" fetchpriority="high">
   <script>
     (function () {
@@ -74,9 +74,6 @@
       </button>
 
       <div class="opening-family-copy">
-        <div class="opening-family-divider" aria-hidden="true">
-          <span></span><b>❦</b><span></span>
-        </div>
         <p>With joyful hearts,</p>
         <p>the families of</p>
         <strong>Joel &amp; Libina</strong>
@@ -89,23 +86,8 @@
   </div>
 
   <div class="curtain-transition" id="curtainTransition" aria-hidden="true">
-    <div class="curtain-glow" aria-hidden="true"></div>
-
-    <div class="curtain-chandelier" aria-hidden="true">
-      <span class="chandelier-chain"></span>
-      <span class="chandelier-crown"></span>
-      <span class="chandelier-drop chandelier-drop-one"></span>
-      <span class="chandelier-drop chandelier-drop-two"></span>
-      <span class="chandelier-drop chandelier-drop-three"></span>
-    </div>
-
-    <div class="curtain-floral curtain-floral-left" aria-hidden="true">❦</div>
-    <div class="curtain-floral curtain-floral-right" aria-hidden="true">❦</div>
-
     <div class="curtain-panel curtain-panel-left" aria-hidden="true"></div>
     <div class="curtain-panel curtain-panel-right" aria-hidden="true"></div>
-
-    <div class="curtain-base" aria-hidden="true"></div>
   </div>
 
   <div class="petal-layer" aria-hidden="true">
@@ -509,32 +491,31 @@
 
         window.clearTimeout(openingTimer);
 
-        // Once the envelope has clearly opened, place the closed curtains
-        // over the already-loaded hero so the second reveal feels seamless.
+        // Show closed curtains just as the flap finishes lifting.
         window.setTimeout(() => {
           curtainTransition?.classList.add("show");
-        }, 1500);
+        }, 620);
 
-        // Remove the envelope while the closed curtains still cover the page.
+        // Remove the envelope immediately behind the closed curtains.
         window.setTimeout(() => {
           openingScreen.hidden = true;
           root.classList.remove("opening-pending");
           root.classList.add("opening-seen");
-        }, 1740);
+        }, 700);
 
-        // Sweep the two curtain panels apart to reveal the hero underneath.
+        // Open the curtains directly onto the hero photo.
         window.setTimeout(() => {
           curtainTransition?.classList.add("open");
-        }, 1810);
+        }, 760);
 
-        // Fade away the decorative curtain layer after it has fully opened.
+        // Fade the curtain layer away once it is fully parted.
         openingTimer = window.setTimeout(() => {
           curtainTransition?.classList.add("done");
-        }, 3020);
+        }, 1640);
 
         window.setTimeout(() => {
           curtainTransition?.classList.remove("show", "open");
-        }, 3480);
+        }, 1940);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
