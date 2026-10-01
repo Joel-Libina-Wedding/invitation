@@ -46,9 +46,54 @@
 
   <div class="opening-screen" id="openingScreen" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
     <div class="opening-envelope-page">
-      <h1 id="openingTitle" class="visually-hidden">Joel and Libina wedding invitation opening</h1>
-      <div class="opening-art" aria-hidden="true"></div>
-      <button class="opening-reveal-hotspot" id="openingReveal" type="button" aria-label="Open Joel and Libina's wedding invitation"></button>
+      <div class="opening-paper-texture" aria-hidden="true"></div>
+
+      <div class="opening-bottom-seams" aria-hidden="true">
+        <span class="opening-seam opening-seam-left"></span>
+        <span class="opening-seam opening-seam-right"></span>
+      </div>
+
+      <div class="opening-flap" id="openingFlap" aria-hidden="true">
+        <div class="opening-flap-face opening-flap-front">
+          <div class="embossed-florals">
+            <span class="embossed-flower flower-one">❀</span>
+            <span class="embossed-flower flower-two">❧</span>
+            <span class="embossed-flower flower-three">✿</span>
+            <span class="embossed-flower flower-four">❦</span>
+            <span class="embossed-flower flower-five">☘</span>
+            <span class="embossed-dot dot-one"></span>
+            <span class="embossed-dot dot-two"></span>
+            <span class="embossed-dot dot-three"></span>
+          </div>
+
+          <h1 id="openingTitle">Tap to Reveal</h1>
+        </div>
+
+        <div class="opening-flap-face opening-flap-back"></div>
+      </div>
+
+      <button
+        class="wax-seal"
+        id="openingReveal"
+        type="button"
+        aria-label="Open Joel and Libina's wedding invitation"
+      >
+        <span class="seal-ring" aria-hidden="true"></span>
+        <span class="seal-monogram" aria-hidden="true">
+          <b class="seal-j">J</b>
+          <i class="seal-l">L</i>
+        </span>
+      </button>
+
+      <div class="opening-family-copy">
+        <p>With joyful hearts,</p>
+        <p>the families of</p>
+        <strong>Joel &amp; Libina</strong>
+        <p>invite you to celebrate their wedding</p>
+        <div class="opening-family-flourish" aria-hidden="true">❧</div>
+      </div>
+
+      <div class="opening-inner-paper" aria-hidden="true"></div>
     </div>
   </div>
 
@@ -480,11 +525,11 @@
         // Let the roughly one-second curtain sweep finish before fading away.
         openingTimer = window.setTimeout(() => {
           curtainTransition?.classList.add("done");
-        }, 1910);
+        }, 2010);
 
         window.setTimeout(() => {
           curtainTransition?.classList.remove("show", "open");
-        }, 2240);
+        }, 2340);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
