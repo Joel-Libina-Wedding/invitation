@@ -74,14 +74,38 @@
       </button>
 
       <div class="opening-family-copy">
+        <div class="opening-family-divider" aria-hidden="true">
+          <span></span><b>❦</b><span></span>
+        </div>
         <p>With joyful hearts,</p>
         <p>the families of</p>
         <strong>Joel &amp; Libina</strong>
         <p>invite you to celebrate their wedding</p>
+        <div class="opening-family-flourish" aria-hidden="true">❧</div>
       </div>
 
       <div class="opening-inner-paper" aria-hidden="true"></div>
     </div>
+  </div>
+
+  <div class="curtain-transition" id="curtainTransition" aria-hidden="true">
+    <div class="curtain-glow" aria-hidden="true"></div>
+
+    <div class="curtain-chandelier" aria-hidden="true">
+      <span class="chandelier-chain"></span>
+      <span class="chandelier-crown"></span>
+      <span class="chandelier-drop chandelier-drop-one"></span>
+      <span class="chandelier-drop chandelier-drop-two"></span>
+      <span class="chandelier-drop chandelier-drop-three"></span>
+    </div>
+
+    <div class="curtain-floral curtain-floral-left" aria-hidden="true">❦</div>
+    <div class="curtain-floral curtain-floral-right" aria-hidden="true">❦</div>
+
+    <div class="curtain-panel curtain-panel-left" aria-hidden="true"></div>
+    <div class="curtain-panel curtain-panel-right" aria-hidden="true"></div>
+
+    <div class="curtain-base" aria-hidden="true"></div>
   </div>
 
   <div class="petal-layer" aria-hidden="true">
@@ -440,6 +464,7 @@
       const root = document.documentElement;
       const openingScreen = document.getElementById("openingScreen");
       const openingReveal = document.getElementById("openingReveal");
+      const curtainTransition = document.getElementById("curtainTransition");
       const themeToggle = document.getElementById("themeToggle");
       const themeIcon = themeToggle?.querySelector(".theme-icon");
       const themeMeta = document.querySelector('meta[name="theme-color"]');
@@ -483,11 +508,33 @@
         }
 
         window.clearTimeout(openingTimer);
-        openingTimer = window.setTimeout(() => {
+
+        // Once the envelope has clearly opened, place the closed curtains
+        // over the already-loaded hero so the second reveal feels seamless.
+        window.setTimeout(() => {
+          curtainTransition?.classList.add("show");
+        }, 1500);
+
+        // Remove the envelope while the closed curtains still cover the page.
+        window.setTimeout(() => {
           openingScreen.hidden = true;
           root.classList.remove("opening-pending");
           root.classList.add("opening-seen");
-        }, 2050);
+        }, 1740);
+
+        // Sweep the two curtain panels apart to reveal the hero underneath.
+        window.setTimeout(() => {
+          curtainTransition?.classList.add("open");
+        }, 1810);
+
+        // Fade away the decorative curtain layer after it has fully opened.
+        openingTimer = window.setTimeout(() => {
+          curtainTransition?.classList.add("done");
+        }, 3020);
+
+        window.setTimeout(() => {
+          curtainTransition?.classList.remove("show", "open");
+        }, 3480);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
