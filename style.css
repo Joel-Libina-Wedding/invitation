@@ -2473,15 +2473,3 @@ html.opening-pending, html.opening-pending body { overflow: hidden; }
 .lantern-layer { z-index: 6; }
 .invitation-page > main, .invitation-page > .closing-section { z-index: 1; }
 .floating-controls { opacity: 1; visibility: visible; pointer-events: auto; }
-/* Narrow screens reserve a clear right-hand lane beside reading/video content. */
-@media (max-width: 980px) {
-  .highlights-section .video-card,
-  .blessings-section .verse-card,
-  .blessings-section .guest-messages {
-    width: calc(100% - 58px);
-    max-width: 760px;
-    margin-left: 0;
-    margin-right: 58px;
-  }
-  .blessings-section .guest-message-card { width: 100%; min-width: 0; overflow-wrap: anywhere; }
-}
