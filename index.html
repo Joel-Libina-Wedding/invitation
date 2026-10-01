@@ -44,30 +44,11 @@
   <audio id="weddingAudio" src="assets/music/wedding-music.mp3" preload="metadata" loop></audio>
 
 
-  <div class="opening-screen" id="openingScreen" role="dialog" aria-modal="true" aria-label="Joel and Libina wedding invitation">
+  <div class="opening-screen" id="openingScreen" role="dialog" aria-modal="true" aria-labelledby="openingTitle">
     <div class="opening-envelope-page">
-      <div class="opening-reference-art" aria-hidden="true"></div>
-
-      <button
-        class="wax-seal"
-        id="openingReveal"
-        type="button"
-        aria-label="Open Joel and Libina's wedding invitation"
-      >
-        <span class="seal-halo" aria-hidden="true"></span>
-        <span class="seal-ring" aria-hidden="true">
-          <span class="seal-monogram">
-            <b class="seal-j">J</b><i class="seal-l">L</i>
-          </span>
-        </span>
-      </button>
-
-      <div class="opening-flap" id="openingFlap" aria-hidden="true">
-        <div class="opening-flap-face opening-flap-front"></div>
-        <div class="opening-flap-face opening-flap-back"></div>
-      </div>
-
-      <div class="opening-inner-paper" aria-hidden="true"></div>
+      <h1 id="openingTitle" class="visually-hidden">Joel and Libina wedding invitation opening</h1>
+      <div class="opening-art" aria-hidden="true"></div>
+      <button class="opening-reveal-hotspot" id="openingReveal" type="button" aria-label="Open Joel and Libina's wedding invitation"></button>
     </div>
   </div>
 
@@ -499,11 +480,11 @@
         // Let the roughly one-second curtain sweep finish before fading away.
         openingTimer = window.setTimeout(() => {
           curtainTransition?.classList.add("done");
-        }, 2010);
+        }, 1910);
 
         window.setTimeout(() => {
           curtainTransition?.classList.remove("show", "open");
-        }, 2340);
+        }, 2240);
       };
 
       openingReveal?.addEventListener("click", finishOpening);
