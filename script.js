@@ -882,101 +882,74 @@ const greetingSubmit =
   );
 
 
-function renderGreetingDocs(
-  docs
-) {
-  if (!guestMessages) {
-    return;
-  }
+const greetingPageSize = 5;
+let greetingDocs = [];
+let greetingVisibleCount = greetingPageSize;
+const greetingPagination = document.createElement("div");
+greetingPagination.style.cssText = "display:none;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 auto 20px;";
+const greetingShowMore = document.createElement("button");
+const greetingShowLess = document.createElement("button");
+for (const button of [greetingShowMore, greetingShowLess]) {
+  button.type = "button";
+  button.className = "secondary-button";
+  button.setAttribute("aria-controls", "guestMessages");
+  greetingPagination.appendChild(button);
+}
+greetingShowLess.textContent = "Show less";
+if (guestMessages) guestMessages.insertAdjacentElement("afterend", greetingPagination);
 
-  guestMessages.innerHTML =
-    "";
-
+function renderGreetingDocs(docs = greetingDocs) {
+  if (!guestMessages) return;
+  greetingDocs = docs;
+  guestMessages.innerHTML = "";
+  greetingPagination.style.display = "none";
   if (!docs.length) {
-    guestMessages.innerHTML =
-      '<p class="empty-greetings">Be the first to leave Joel & Libina a message.</p>';
-
+    guestMessages.innerHTML = '<p class="empty-greetings">Be the first to leave Joel & Libina a message.</p>';
     return;
   }
-
-  docs.forEach(
-    (
-      docSnap
-    ) => {
-      const item =
-        docSnap.data();
-
-      const card =
-        document.createElement(
-          "article"
-        );
-
-      card.className =
-        "guest-message-card";
-
-
-      const message =
-        document.createElement(
-          "p"
-        );
-
-      message.textContent =
-        item.message ||
-        "";
-
-
-      const name =
-        document.createElement(
-          "strong"
-        );
-
-      name.textContent =
-        `— ${item.name || "Guest"}`;
-
-
-      const meta =
-        document.createElement(
-          "div"
-        );
-
-      meta.className =
-        "greeting-meta";
-
-
-      const timestamp =
-        item.createdAt?.toDate?.();
-
-
-      meta.textContent =
-        timestamp
-          ? timestamp.toLocaleDateString(
-              undefined,
-              {
-                month:
-                  "short",
-                day:
-                  "numeric",
-                year:
-                  "numeric"
-              }
-            )
-          : "Just now";
-
-
-      card.append(
-        message,
-        name,
-        meta
-      );
-
-
-      guestMessages.appendChild(
-        card
-      );
-    }
-  );
+  const visibleCount = Math.min(greetingVisibleCount, docs.length);
+  docs.slice(0, visibleCount).forEach((docSnap) => {
+    const item = docSnap.data();
+    const card = document.createElement("article");
+    card.className = "guest-message-card";
+    const message = document.createElement("p");
+    message.textContent = item.message || "";
+    const name = document.createElement("strong");
+    name.textContent = `— ${item.name || "Guest"}`;
+    const meta = document.createElement("div");
+    meta.className = "greeting-meta";
+    const timestamp = item.createdAt?.toDate?.();
+    meta.textContent = timestamp
+      ? timestamp.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })
+      : "Just now";
+    card.append(message, name, meta);
+    guestMessages.appendChild(card);
+  });
+  if (docs.length > greetingPageSize) {
+    greetingPagination.style.display = "flex";
+    const remaining = docs.length - visibleCount;
+    greetingShowMore.style.display = remaining > 0 ? "" : "none";
+    greetingShowMore.textContent = `Show more (+${Math.min(greetingPageSize, remaining)})`;
+    greetingShowMore.setAttribute("aria-expanded", String(visibleCount > greetingPageSize));
+    greetingShowLess.style.display = visibleCount > greetingPageSize ? "" : "none";
+  }
 }
 
+greetingShowMore.addEventListener("click", () => {
+  greetingVisibleCount = Math.min(greetingDocs.length, greetingVisibleCount + greetingPageSize);
+  renderGreetingDocs();
+  // Keep keyboard focus on an available control after the last batch appears.
+  if (greetingShowMore.style.display === "none") greetingShowLess.focus({ preventScroll: true });
+});
+greetingShowLess.addEventListener("click", () => {
+  greetingVisibleCount = greetingPageSize;
+  renderGreetingDocs();
+  greetingShowMore.focus({ preventScroll: true });
+  guestMessages.scrollIntoView({
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    block: "start"
+  });
+});
 
 try {
   const greetingsQuery =
@@ -1015,6 +988,7 @@ try {
       if (
         guestMessages
       ) {
+        greetingPagination.style.display = "none";
         guestMessages.innerHTML =
           '<p class="empty-greetings">Greetings are temporarily unavailable.</p>';
       }
@@ -1952,7 +1926,7 @@ addCalendar?.addEventListener(
 
 const revealTargets = [
   ...document.querySelectorAll(
-    ".section-heading, .bio-card, .story-card, .event-card-main, .video-card, .action-tile, .verse-card, .guest-messages, .closing-section"
+    ".section-heading, .bio-card, .story-card, .invitation-message-inner, .event-card-main, .video-card, .action-tile, .verse-card, .guest-messages, .closing-section"
   )
 ];
 
